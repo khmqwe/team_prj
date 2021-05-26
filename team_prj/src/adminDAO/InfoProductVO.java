@@ -1,34 +1,36 @@
 package adminDAO;
 
 public class InfoProductVO {
-	private String p_num,p_name,p_prive,t_type,p_cooktime,p_amount,s_type,p_thumb,p_main_img,p_detailes_img,p_explain;
+	private String p_num,p_name,p_price,t_type,p_cooktime,p_amount,s_type,p_thumb_img,p_main_img,p_detailes_img,p_explain;
 	
 	public InfoProductVO() {
 		
 	}
 
-	public InfoProductVO(String p_num,String p_name, String p_prive, String t_type, String p_cooktime, String p_amount,
-			String s_type, String p_thumb, String p_main_img, String p_detailes_img, String p_explain) {
-		
+	public InfoProductVO(String p_num, String p_name, String p_price, String t_type, String p_cooktime, String p_amount,
+			String s_type, String p_thumb_img, String p_main_img, String p_detailes_img, String p_explain) {
+		super();
 		this.p_num = p_num;
 		this.p_name = p_name;
-		this.p_prive = p_prive;
+		this.p_price = p_price;
 		this.t_type = t_type;
 		this.p_cooktime = p_cooktime;
 		this.p_amount = p_amount;
 		this.s_type = s_type;
-		this.p_thumb = p_thumb;
+		this.p_thumb_img = p_thumb_img;
 		this.p_main_img = p_main_img;
 		this.p_detailes_img = p_detailes_img;
 		this.p_explain = p_explain;
 	}
-	public String getp_num() {
+
+	public String getP_num() {
 		return p_num;
 	}
 
-	public void setp_num(String p_num) {
+	public void setP_num(String p_num) {
 		this.p_num = p_num;
 	}
+
 	public String getP_name() {
 		return p_name;
 	}
@@ -37,12 +39,12 @@ public class InfoProductVO {
 		this.p_name = p_name;
 	}
 
-	public String getP_prive() {
-		return p_prive;
+	public String getP_price() {
+		return p_price;
 	}
 
-	public void setP_prive(String p_prive) {
-		this.p_prive = p_prive;
+	public void setP_price(String p_price) {
+		this.p_price = p_price;
 	}
 
 	public String getT_type() {
@@ -77,12 +79,12 @@ public class InfoProductVO {
 		this.s_type = s_type;
 	}
 
-	public String getP_thumb() {
-		return p_thumb;
+	public String getP_thumb_img() {
+		return p_thumb_img;
 	}
 
-	public void setP_thumb(String p_thumb) {
-		this.p_thumb = p_thumb;
+	public void setP_thumb_img(String p_thumb_img) {
+		this.p_thumb_img = p_thumb_img;
 	}
 
 	public String getP_main_img() {
@@ -108,5 +110,6 @@ public class InfoProductVO {
 	public void setP_explain(String p_explain) {
 		this.p_explain = p_explain;
 	}
+
 	
 }
