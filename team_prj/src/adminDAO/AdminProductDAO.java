@@ -224,6 +224,7 @@ public static AdminProductDAO getInstance() {
 			dc.dbClose(con, pstmt, rs);
 		}//end finally
 		
+		
 		return result;
 		
 	}//deleteProduct

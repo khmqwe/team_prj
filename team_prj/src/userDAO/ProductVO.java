@@ -65,5 +65,4 @@ public class ProductVO {
 		this.p_price = p_price;
 	}
 
-	
 }

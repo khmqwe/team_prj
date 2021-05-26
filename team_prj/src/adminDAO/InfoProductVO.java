@@ -3,6 +3,7 @@ package adminDAO;
 public class InfoProductVO {
 	private String p_num,p_name,p_price,t_type,p_cooktime,p_amount,s_type,p_thumb_img,p_main_img,p_detailes_img,p_explain;
 	
+	
 	public InfoProductVO() {
 		
 	}

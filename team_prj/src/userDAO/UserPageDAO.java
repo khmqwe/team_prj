@@ -60,7 +60,7 @@ public static UserPageDAO getInstance() {
 				
 				if (result != 0) {
 					mVO.setFlag(true);
-				}
+				}//end if
 				
 				list.add(mVO);
 				result = 0;
