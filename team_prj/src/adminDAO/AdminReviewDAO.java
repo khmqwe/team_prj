@@ -95,6 +95,7 @@ public class AdminReviewDAO {
 				
 				pstmt = con.prepareStatement(sb.toString());
 				
+				
 				//3. 바인드변수에 값 할당
 				pstmt.setNull(1, Types.INTEGER);
 				pstmt.setNull(2, Types.VARCHAR);
