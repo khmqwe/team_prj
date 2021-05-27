@@ -21,7 +21,14 @@
 
  </style>
  <script type="text/javascript">
- 
+ $(function() {
+	 $("#loginBtn").click(function() {
+		location.href="07_login.jsp"
+ 	 });
+	 $("#passfind").click(function() {
+		location.href="10_passFind.jsp"
+ 	 });
+ });
  </script>
 </head>
 <body>
@@ -33,8 +40,8 @@
 <div class="submitPage">
 <h2> <strong>등록하신 아이디는 OOO 입니다.</strong> </h2> <br>
 로그인 후에 서비스를 이용할 수 있습니다. <br><br>
-<input type="button" value="비밀번호찾기" class="btn btn-success"/>&nbsp;&nbsp;&nbsp;&nbsp;
-		<input type="button" value="로그인" class="btn btn-success"/>
+<input type="button" id="passfind" value="비밀번호찾기" class="btn btn-success"/>&nbsp;&nbsp;&nbsp;&nbsp;
+		<input type="button" id="loginBtn" value="로그인" class="btn btn-success"/>
 </div>
 
 </div>

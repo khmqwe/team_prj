@@ -20,7 +20,15 @@
 
  </style>
  <script type="text/javascript">
+
  
+ $(function() {
+	 $("#login").click(function() {
+		$("#loginFrm").submit();
+ 	 });
+	 
+	 
+ });
  </script>
 </head>
 <body>
@@ -28,6 +36,7 @@
 <!--header-->
 <%@ include file="../common/template/header.jsp" %>
 <div class="content">
+<form action="02_main_login.jsp" method="post" id="loginFrm"> 
 			<div class="box">
 			<h2> <strong>로그인</strong> </h2>
 			<div class="id-label">
@@ -43,18 +52,18 @@
   			<input type="password" class="pass-text" placeholder="비밀번호를 입력하세요." >
   			</div>
 			<div> <br>	
-			<input type="button" value="로그인" class="btn btn-success btn-lg" style="width:477px; height:70px;font-weight: bold;"/>
+			<input type="button" id="login" value="로그인" class="btn btn-success btn-lg" style="width:477px; height:70px;font-weight: bold;"/>
 			</div>
 		<div>
           <div class="member-check">
-            <p class=""><a href="http://localhost/team_prj/jspFiles/03_signIn.jsp">회원이 아니신가요?</a></p>
+            <p class=""><a href="03_signIn.jsp">회원이 아니신가요?</a></p>
           </div>
           <div>
-              <p class=""><a href="http://localhost/team_prj/jspFiles/08_idFind.jsp">아이디/비밀번호 찾기</a></p>
+              <p class=""><a href=08_idFind.jsp>아이디/비밀번호 찾기</a></p>
           </div>          
 		</div>
 		</div>
-
+</form>
 </div>
 <!--footer-->
 <%@ include file="../common/template/footer.jsp" %>

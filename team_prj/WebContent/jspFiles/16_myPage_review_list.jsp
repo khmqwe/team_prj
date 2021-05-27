@@ -66,9 +66,9 @@ $(document).ready(function () {
 		</div>
 		<div class="menu__left__list">
 			<ul>
-			<li class="list"><a class="list__info" href="https://www.naver.com">구매목록</a></li>
-			<li class="list"><a class="list__info">내가 쓴 후기</a></li>
-			<li class="list"><a class="list__info">회원정보 수정</a></li>
+			<li class="list"><a class="list__info" href="17_myPage_purchse_list.jsp">구매목록</a></li>
+			<li class="list"><a class="list__info" href="16_myPage_review_list.jsp">내가 쓴 후기</a></li>
+			<li class="list"><a class="list__info" href="19_myPage_pass_check.jsp">회원정보 수정</a></li>
 			</ul>
 		</div>
 	</div>

@@ -21,7 +21,11 @@
 
  </style>
  <script type="text/javascript">
- 
+ $(function() {
+		$("#find").click(function() {
+			$("#findFrm").submit();
+		});
+	});//ready
  </script>
 </head>
 <body>
@@ -33,14 +37,15 @@
 			<h2><strong>아이디/비밀번호찾기</strong></h2><br>
 			<div class="find-menu" >
 			<ul class="nav nav-tabs nav-justified" >
-			  <li role="presentation"><a href="#" style="color:#ddd;">아이디찾기</a></li>
-			  <li role="presentation" class="active"><a href="#" >비밀번호찾기</a></li>
+			  <li role="presentation"><a href="08_idFind.jsp" style="color:#ddd;">아이디찾기</a></li>
+			  <li role="presentation" class="active"><a href="10_passFind.jsp" >비밀번호찾기</a></li>
 			</ul>
 			</div>
 			<div>
 			<h2>등록정보로 비밀번호 찾기</h2>
 			회원가입 시 등록한 정보로 찾을 수 있습니다.
 			</div>
+			<form action="11_passCheck.jsp" method="post" id="findFrm"> 			
 			<div class="idfind-name">
 			<label>이름</label>&nbsp;&nbsp;&nbsp;
 			<input type="text" placeholder="이름을 입력해주세요."class="name-text"/>
@@ -58,7 +63,8 @@
 			<input type="text" class="tel-text"/>
 			</div>
 			<br>
-			<input type="button" value="확인" class="btn btn-success btn-lg" style="width:450px; height:70px;font-weight: bold;"/>
+			<input type="button" value="확인" id="find" class="btn btn-success btn-lg" style="width:450px; height:70px;font-weight: bold;"/>
+			</form>
 			</div>
 </div>
 

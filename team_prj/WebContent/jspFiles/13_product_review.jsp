@@ -19,7 +19,11 @@
 
  </style>
  <script type="text/javascript">
- 
+ $(function() {
+	$("#buy").click(function() {
+		$("#p_Frm").submit();
+	});
+});//ready
  </script>
 </head>
 <body>
@@ -27,6 +31,8 @@
 <!--header-->
 <%@ include file="../common/template/header.jsp" %>
 <div class="content">
+<form action="14_buyCheck.jsp" method="post" id="p_Frm"> 
+
 <div class="thumb-img">
 <img src="https://sjnfzdfjrjgl1655541.cdn.ntruss.com/goods/3/2021/05/729_tmp_ba0e1cf9a11e544280702e8f1b0e9d982846view.jpg" width="500px"; height="500px";>
 </div>
@@ -67,7 +73,7 @@
 	<input type="text" class="" placeholder="수량" style="width:100px;height:40px;" />
 	<input type="button" value="+"/> &nbsp;&nbsp;
 	<strong>총 금액 30,000원</strong>
-	<input type="button" value="구매" class="btn btn-success btn-lg" style="width:150px; margin-left:50px;"/>
+	<input type="button" id="buy" value="구매" class="btn btn-success btn-lg" style="width:150px; margin-left:50px;"/>
 	</div>
 	
 	<div style="text-align:center;font-size:18px;font-weight:bold; margin-top:70px;">
@@ -87,6 +93,7 @@
 	</div>
     <div class="review-cnt">1건</div>
 	<hr align="left" class="hr-type2">
+</form>
 </div>
 <div style="clear: both;"></div>
 

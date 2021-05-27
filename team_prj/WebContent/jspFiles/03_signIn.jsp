@@ -29,8 +29,15 @@
 		$("#idchk").click(function() {
 			window.open("04_idcheck.jsp","idchk","width=500px,height=300px");
 		});
-		//아이디사용
- 
+		
+		$("#insert").click(function() {
+			$("#singUpFrm").submit();
+		});
+		
+		$("#cancel").click(function() {
+			location.href ='01_main.jsp';
+		});
+		
 		//우편번호 검색
 		 $("#zipcodeBtn").click(function() {
 		      new daum.Postcode({
@@ -70,7 +77,7 @@
 <!--header-->
 <%@ include file="../common/template/header.jsp" %>
 
-<form action="#" name="singUp"> 
+<form action="06_signInCheck.jsp" method="post" id="singUpFrm"> 
 <table>
 	<tr>
 		<td colspan="2" class="center"><font size="6"><strong>회원정보입력</strong></font>  
@@ -340,8 +347,8 @@
 	</tr>
 	<tr>
 		<td colspan="2" class="center">
-		<input type="button" value="가입"  class="btn btn-success">&nbsp;&nbsp;&nbsp;&nbsp;
-		<input type="button" value="취소" class="btn btn-default">
+		<input type="button" value="가입"  class="btn btn-success" id="insert">&nbsp;&nbsp;&nbsp;&nbsp;
+		<input type="button" value="취소" class="btn btn-default" id="cancel">
 		</td>
 	
 	</tr>

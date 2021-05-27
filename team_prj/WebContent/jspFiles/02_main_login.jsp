@@ -21,7 +21,12 @@
 
  </style>
  <script type="text/javascript">
- 
+ $(function() {
+		$("#mypage").click(function() {
+			location.href ='15_myPage_main.jsp';
+		});	
+});
+
  </script>
 </head>
 <body>
@@ -79,7 +84,8 @@
   </div>
   </div>
   <!--  -->
-    <div class="col-xs-6 col-md-4"> 
+    	<%for(int i=0;i<6;i++){%>
+  <div class="col-xs-6 col-md-4"> 
   <div class="pList">
     <a href="#" class="thumbnail">
 	<img src="http://localhost/project_2/common/images/p_1.png" class="img-rounded">
@@ -87,47 +93,8 @@
 	<h4><strong>고기만두</strong></h4>
 	<span>7,800원</span>
   </div>
-  </div>
-  <!--  -->
-    <div class="col-xs-6 col-md-4"> 
-  <div class="pList">
-    <a href="#" class="thumbnail">
-	<img src="http://localhost/project_2/common/images/p_1.png" class="img-rounded">
-    </a>
-	<h4><strong>고기만두</strong></h4>
-	<span>7,800원</span>
-  </div>
-  </div>
-    <!--  -->
-    <div class="col-xs-6 col-md-4"> 
-  <div class="pList">
-    <a href="#" class="thumbnail">
-	<img src="http://localhost/project_2/common/images/p_1.png" class="img-rounded">
-    </a>
-	<h4><strong>고기만두</strong></h4>
-	<span>7,800원</span>
-  </div>
-  </div>
-    <!--  -->
-    <div class="col-xs-6 col-md-4"> 
-  <div class="pList">
-    <a href="#" class="thumbnail">
-	<img src="http://localhost/project_2/common/images/p_1.png" class="img-rounded">
-    </a>
-	<h4><strong>고기만두</strong></h4>
-	<span>7,800원</span>
-  </div>
-  </div>
-    <!--  -->
-    <div class="col-xs-6 col-md-4"> 
-  <div class="pList">
-    <a href="#" class="thumbnail">
-	<img src="http://localhost/project_2/common/images/p_1.png" class="img-rounded">
-    </a>
-	<h4><strong>고기만두</strong></h4>
-	<span>7,800원</span>
-  </div>
-  </div>
+  </div>	
+	<%}//end for %>
 
 </div> 	<!-- 섬네일 끝 -->
 	<!-- 페이지네이션 -->
@@ -163,9 +130,9 @@
 				<!-- 회원가입/비밀번호 찾기 -->
 		<div style="text-align:center;">
 		<span class="memberName">송준희님</span> 안녕하세요.
-		<div class="btnRight"><input type="button" class="btn btn-success" value="로그아웃"></div> 
+		<div class="btnRight"><input type="button" class="btn btn-success" value="로그아웃" id="logout"></div> 
 		<br><br>
-		<input type="button" value="마이페이지" class="btn  btn-default btn-lg" style="width:100%; height:70px;font-weight: bold; ">
+		<input type="button" id="mypage" value="마이페이지" class="btn  btn-default btn-lg" style="width:100%; height:70px;font-weight: bold; ">
 		</div>
 	</div><!-- 로그인끝 -->
 	<!-- 광고영역 -->

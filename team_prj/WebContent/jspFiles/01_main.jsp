@@ -21,7 +21,11 @@
 
  </style>
  <script type="text/javascript">
- 
+ $(function() {
+		$("#loginBtn").click(function() {
+			$("#loginFrm").submit();
+		});
+	});//ready
  </script>
 </head>
 <body>
@@ -67,8 +71,9 @@
   <button type="button" class="btn btn-default">중식</button>
   <button type="button" class="btn btn-default">전체</button>
 </div>
-	
- <div class="row"> <!-- 섬네일 -->
+
+	<div class="row"> <!-- 섬네일 --> 
+	<%for(int i=0;i<6;i++){%>
   <div class="col-xs-6 col-md-4"> 
   <div class="pList">
     <a href="#" class="thumbnail">
@@ -77,58 +82,8 @@
 	<h4><strong>고기만두</strong></h4>
 	<span>7,800원</span>
   </div>
-  </div>
-  <!--  -->
-    <div class="col-xs-6 col-md-4"> 
-  <div class="pList">
-    <a href="#" class="thumbnail">
-	<img src="http://localhost/project_2/common/images/p_1.png" class="img-rounded">
-    </a>
-	<h4><strong>고기만두</strong></h4>
-	<span>7,800원</span>
-  </div>
-  </div>
-  <!--  -->
-    <div class="col-xs-6 col-md-4"> 
-  <div class="pList">
-    <a href="#" class="thumbnail">
-	<img src="http://localhost/project_2/common/images/p_1.png" class="img-rounded">
-    </a>
-	<h4><strong>고기만두</strong></h4>
-	<span>7,800원</span>
-  </div>
-  </div>
-    <!--  -->
-    <div class="col-xs-6 col-md-4"> 
-  <div class="pList">
-    <a href="#" class="thumbnail">
-	<img src="http://localhost/project_2/common/images/p_1.png" class="img-rounded">
-    </a>
-	<h4><strong>고기만두</strong></h4>
-	<span>7,800원</span>
-  </div>
-  </div>
-    <!--  -->
-    <div class="col-xs-6 col-md-4"> 
-  <div class="pList">
-    <a href="#" class="thumbnail">
-	<img src="http://localhost/project_2/common/images/p_1.png" class="img-rounded">
-    </a>
-	<h4><strong>고기만두</strong></h4>
-	<span>7,800원</span>
-  </div>
-  </div>
-    <!--  -->
-    <div class="col-xs-6 col-md-4"> 
-  <div class="pList">
-    <a href="#" class="thumbnail">
-	<img src="http://localhost/project_2/common/images/p_1.png" class="img-rounded">
-    </a>
-	<h4><strong>고기만두</strong></h4>
-	<span>7,800원</span>
-  </div>
-  </div>
-
+  </div>	
+	<%}//end for %>
 </div> 	<!-- 섬네일 끝 -->
 	<!-- 페이지네이션 -->
 	<div id="page">
@@ -157,8 +112,8 @@
 	</div>
 
 	<div id="rightSide">
-	
 	<div id="login"> <!-- 로그인창 -->
+	<form action="02_main_login.jsp" method="post" id="loginFrm">
 		<!-- id 입력폼 -->	
 		<div class="form-group-lg">
 		 <label class="sr-only" for="id">input id</label>
@@ -177,10 +132,11 @@
 			</div>
 				<!-- 회원가입/비밀번호 찾기 -->
 		<div style="text-align:center; margin-top: 22px;">
-		<span>회원가입</span>
-		<span>아이디/비밀번호찾기</span>&nbsp;&nbsp;&nbsp;  
-		<input type="button" value="로그인" class="btn btn-success btn-lg" style="width:140px;">
+		<a href="03_signIn.jsp"><span>회원가입</span></a>
+		<a href="08_idFind.jsp"><span>아이디/비밀번호찾기</span></a>&nbsp;&nbsp;&nbsp;  
+		<input type="button" value="로그인" id="loginBtn" class="btn btn-success btn-lg" style="width:140px;">
 		</div>
+	</form>	
 	</div><!-- 로그인끝 -->
 	<!-- 광고영역 -->
 	<div id="ad"> 

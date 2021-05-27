@@ -21,7 +21,11 @@
 
  </style>
  <script type="text/javascript">
- 
+ $(function() {
+		$("#find").click(function() {
+			$("#findFrm").submit();
+		});
+	});//ready
  </script>
 </head>
 <body>
@@ -29,31 +33,37 @@
 <!--header-->
 <%@ include file="../common/template/header.jsp" %>
 <div class="content">
+
+
 			<div class="box">
 			<h2><strong>아이디/비밀번호찾기</strong></h2><br>
 			<div class="find-menu" >
 			<ul class="nav nav-tabs nav-justified" >
-			  <li role="presentation" class="active"><a href="http://localhost/team_prj/jspFiles/08_idFind.jsp">아이디찾기</a></li>
-			  <li role="presentation" ><a href="#" style="color:#ddd;">비밀번호찾기</a></li>
+			  <li role="presentation" class="active"><a href="08_idFind.jsp">아이디찾기</a></li>
+			  <li role="presentation" ><a href="10_passFind.jsp" style="color:#ddd;">비밀번호찾기</a></li>
 			</ul>
 			</div>
 			<div>
 			<h2>등록정보로 아이디 찾기</h2>
 			회원가입 시 등록한 정보로 찾을 수 있습니다.
 			</div>
+			<form action="09_idCheck.jsp" method="post" id="findFrm"> 
 			<div class="idfind-name">
 			<label>이름</label>
-			<input type="text" onkeyup="this.value = this.value.replace(/[^ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/g,'');" placeholder="이름을 입력해주세요."class="name-text"/>
+			<input type="text" placeholder="이름을 입력해주세요."class="name-text" name="name" id="name" />
 			</div>
 			<div class="idfind-telnum">
 			<label>휴대폰 번호</label>
-			<input type="text" onkeyup="this.value = this.value.replace(/[^0-9]/g,'');" maxlength="3"class="tel-text"/> -
-			<input type="text" onkeyup="this.value = this.value.replace(/[^0-9]/g,'');" maxlength="4"class="tel-text"/> -
-			<input type="text" onkeyup="this.value = this.value.replace(/[^0-9]/g,'');" maxlength="4"class="tel-text"/>
+			<input type="text" class="tel-text" name="tel1" id="tel1"/> -
+			<input type="text" class="tel-text" name="tel2" id="tel2"/> -
+			<input type="text" class="tel-text" name="tel3" id="tel3"/>
 			</div>
+			
 			<br>
-			<input type="button" value="확인" class="btn btn-success btn-lg" style="width:450px; height:70px;font-weight: bold;"/>
+			<input type="button" name="find" id="find" value="확인" class="btn btn-success btn-lg" style="width:450px; height:70px;font-weight: bold;"/>
+			</form>
 			</div>
+
 </div>
 
 <!--footer-->

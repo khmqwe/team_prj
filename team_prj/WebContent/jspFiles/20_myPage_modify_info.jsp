@@ -28,8 +28,14 @@ $(function() {
 	$("#pass_change").click(function() {
 		window.open("21_pop_change_pass.jsp","pass_change","width=405px,height=405px");
 	})
-
-
+//변경버튼
+	 $("#btnMod").click(function() {
+		 $("#updateFrm").submit();
+	 });
+//취소 버튼 > 마이페이지 홈으로 
+	 $("#btnCancel").click(function() {
+		 location.href="15_myPage_main.jsp";
+	 });
 	
 	//우편번호 검색
 	 $("#zipcodeBtn").click(function() {
@@ -77,9 +83,9 @@ $(function() {
 		</div>
 		<div class="menu__left__list">
 			<ul>
-			<li class="list"><a class="list__info" href="https://www.naver.com">구매목록</a></li>
-			<li class="list"><a class="list__info">내가 쓴 후기</a></li>
-			<li class="list"><a class="list__info">회원정보 수정</a></li>
+			<li class="list"><a class="list__info" href="17_myPage_purchse_list.jsp">구매목록</a></li>
+			<li class="list"><a class="list__info" href="16_myPage_review_list.jsp">내가 쓴 후기</a></li>
+			<li class="list"><a class="list__info" href="19_myPage_pass_check.jsp">회원정보 수정</a></li>
 			</ul>
 		</div>
 	</div>
@@ -89,7 +95,7 @@ $(function() {
 			
 		</div>
 		<div class="m__table">
-			<form action="" class="form-inline">
+			<form action="22_revise_confirm.jsp" method="post" id="updateFrm" class="form-inline">
 			<table style="position:absolute;">
 				<tr>
 				<td colspan="2" class="center"><font size="6"><strong>회원정보수정</strong></font></td>
