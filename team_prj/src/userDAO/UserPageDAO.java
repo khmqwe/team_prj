@@ -7,9 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import userDAO.MainVO;
-import userDAO.ProductDetailVO;
-import userDAO.ProductVO;
+import adminDAO.DbConnection;
 
 public class UserPageDAO {
 
@@ -40,30 +38,31 @@ public static UserPageDAO getInstance() {
 		try {
 			con = dc.getCon();
 			StringBuilder sb = new StringBuilder();
-			sb.append("select p_thumb_img, p_name, t_type, p_num  ");
-			//.append(" from member m, ordering o, product p, product_img pi ")
-			//.append(" where (o.m_id = m.m_id) and (o.p_num = p.p_num) and (pi.p_num = p.p_num) and m.m_id = ? ");
+			if (type == 0) {
+				sb.append("select  p_thumb_img, p.p_name, t.t_type, p.p_num ")
+				.append(" from product p, product_img pi, type t ")
+				.append(" where (pi.p_num = p.p_num) and (p.t_type = t.t_type) ");
+				
+				pstmt = con.prepareStatement(sb.toString());
+			} else {
+				sb.append("select  p_thumb_img, p.p_name, t.t_type, p.p_num ")
+				.append(" from product p, product_img pi, type t ")
+				.append(" where (pi.p_num = p.p_num) and (p.t_type = t.t_type) and t.t_type=? ");
+				
+				pstmt = con.prepareStatement(sb.toString());
+				pstmt.setInt(1, type);
+			}
 			
-			pstmt = con.prepareStatement(sb.toString());
-			pstmt.setInt(1, type);
 			
 			rs = pstmt.executeQuery();
 			
 			MainVO mVO = null;
-			int result = 0;
 			
 			while (rs.next()) {
 				mVO = new MainVO(rs.getString(1), rs.getString(2),
 						rs.getInt(3), rs.getInt(4));
 				
-				//result = selectExistReview(mVO.getP_num());
-				
-				if (result != 0) {
-					mVO.setFlag(true);
-				}//end if
-				
 				list.add(mVO);
-				result = 0;
 			}
 			
 		} finally {
@@ -138,10 +137,6 @@ public static UserPageDAO getInstance() {
 						rs.getString(3), rs.getInt(4));
 				
 				//result = selectExistReview(mVO.getP_num());
-				
-				if (result != 0) {
-					prVO.setFlag(true);
-				}//end if
 				
 				list.add(prVO);
 				result = 0;

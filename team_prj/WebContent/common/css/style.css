@@ -13,6 +13,11 @@
 .idfind-telnum{margin-top:18px;}
 .idfind-name{margin-top:18px;}
 
+/* 로그인 부분 수정한거 */
+.input-fix {margin: 0; width: 350px;}
+.input-form {padding: 6px 27px 6px 12px;}
+.btn-csc {margin-bottom: 12px;}
+
 .find-menu{
 	width:450px;
 	height:80px;
@@ -146,15 +151,17 @@ div{margin: 0px auto;}
 .content{min-height:677px; position:relative;}
 #leftSide{width:800px; position:absolute; padding:20px}
 #page{text-align:center;}
-#rightSide{width:400px;position:absolute; left:800px}
+#rightSide{width:400px;position:absolute; left: 800px; margin-top: 45px;}
 #login{width:400px; height:200px; padding:20px;text-align:center;line-height: 40px;}
 .form-group-lg{margin:5px;}
 #ad  {width:370px;height:200px; background-color:#333; margin:15px;}
-#ad2 {width:370px;height:300px; background-color:#333; margin:15px;}
+#ad2 {width:370px;height:310px; background-color:#333; margin:15px;}
 .pList{width:250px; text-align:center; margin-bottom:20px; margin-top:5px}
 .thumbnail{margin:0px;}
 .memberName{font-size:20px; font-weight: bold;}
 .btnRight{position:relative; float:right;}
+
+
 /* content끝 */
 
 /* 회원가입 */
@@ -323,3 +330,7 @@ height: 70px;
 .footerB{color:#444;}
 /* footer끝 */
 
+/* 아이디 비밀번호 입력 칸 맞게 하는 부분 */
+.input-form {
+	width: 50px;
+}

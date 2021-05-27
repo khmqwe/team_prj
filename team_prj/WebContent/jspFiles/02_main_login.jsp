@@ -9,13 +9,13 @@
     <title></title>
 
     <!-- bootstrap -->
-    <link href="http://localhost/project_2/common/bootstrap-3.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="http://localhost/team_prj/common/bootstrap-3.3.2/css/bootstrap.min.css" rel="stylesheet">
     <!-- jQuery CDN(Contents Delivery Network) -->
  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
     <!-- bootstrap -->
-    <script src="http://localhost/project_2/common/bootstrap-3.3.2/js/bootstrap.min.js"></script>
+    <script src="http://localhost/team_prj/common/bootstrap-3.3.2/js/bootstrap.min.js"></script>
 	<!-- stlye.css -->
-	<link href="http://localhost/project_2/common/css/style.css" rel="stylesheet">
+	<link href="http://localhost/team_prj/common/css/style.css" rel="stylesheet">
 
  <style type="text/css">
 
@@ -34,7 +34,7 @@
   <ol class="carousel-indicators">
     <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
     <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-    <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+    
   </ol>
 
   <!-- Wrapper for slides -->
@@ -62,7 +62,7 @@
 	<div id="main">
 	<div id="leftSide">
 	
-<div class="btn-group" role="group" aria-label="분류">
+<div class="btn-group btn-csc" role="group" aria-label="분류">
   <button type="button" class="btn btn-default">한식</button>
   <button type="button" class="btn btn-default">중식</button>
   <button type="button" class="btn btn-default">전체</button>
