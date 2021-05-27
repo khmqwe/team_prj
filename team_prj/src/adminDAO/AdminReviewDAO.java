@@ -4,11 +4,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
-
-import adminDAO.AdminReviewVO;
-import adminDAO.ReviewVO;
 
 public class AdminReviewDAO {
 
@@ -43,18 +41,26 @@ public class AdminReviewDAO {
 		//1.커넥션얻기
 			con = dc.getCon(); 
 		//2. 쿼리문 생성객체 얻기 
-			String selectQuery = "select ";
-			pstmt = con.prepareStatement(selectQuery);
+			StringBuilder sb = new StringBuilder();
+			sb.append("select m.m_id , m.m_name, r.r_title, o.o_num")
+			.append("from member m, review r, ordering o")
+			.append("(o.m_id=m.m_id) and (r.o_num = o.o_num) and (o.p_num = p.p_num) //여기 ;");
+			
+			pstmt = con.prepareStatement(sb.toString());
 			
 		//3. 바인드변수에 값 할당
+			pstmt.setInt(1, option);
+			pstmt.setString(2, optionText);
 			
 		//4. 쿼리문 수행 후 결과 얻기 
 			rs = pstmt.executeQuery();
 			
-			if (rs.next()) {
-				
-			}//end if 
+			AdminReviewVO arVO = null; 
 			
+			while(rs.next()) {
+				arVO = new AdminReviewVO(rs.getString(1), rs.getString(2), rs.getString(3),rs.getInt(4));
+				list.add(arVO);
+			}
 		}finally {
 			//5. 연결 끊기
 			 dc.dbClose(con, pstmt, rs);
@@ -65,7 +71,7 @@ public class AdminReviewDAO {
 	
 	public boolean deleteAdminReview(int o_num) throws SQLException {
 		
-		boolean yesorno = false;
+		boolean chk = false;
 		
 		 DbConnection dc = DbConnection.getInstance();
 	      PreparedStatement pstmt = null;
@@ -76,27 +82,34 @@ public class AdminReviewDAO {
 	    	//1.커넥션얻기
 				con = dc.getCon(); 
 			//2. 쿼리문 생성객체 얻기 
-				String selectQuery = "delete ";
-				pstmt = con.prepareStatement(selectQuery);
+				StringBuilder sb = new StringBuilder();
 				
-			//3. 바인드변수에 값 할당
+				sb.append("update review" )
+				.append("set  o_num = ?, r_title = ?, r_content = ?, r_date = ?, r_score = ? ")
+				.append("where o_num = ? ");
+				
+				pstmt = con.prepareStatement(sb.toString());
+				
+				//3. 바인드변수에 값 할당
+				pstmt.setNull(1, Types.INTEGER);
+				pstmt.setNull(2, Types.VARCHAR);
+				pstmt.setNull(3, Types.VARCHAR);
+				pstmt.setNull(4, Types.DATE);
+				pstmt.setNull(5, Types.INTEGER);
+				pstmt.setInt(6, o_num);
+				
 				
 			//4. 쿼리문 수행 후 결과 얻기 
 				rs = pstmt.executeQuery();
-				
-				if (rs.next()) {
-					
-				}//end if 
 	      } finally {
 	    	  dc.dbClose(con, pstmt, rs);
 	      }//end finally 
 	      
-	      return yesorno;
+	      return chk;
 	}//deleteAdminReview
 	
 	public ReviewVO selectAdminReview(int o_num) throws SQLException{
-		
-		 ReviewVO rVO = null;
+		ReviewVO rVO = null;
 		
 		 DbConnection dc = DbConnection.getInstance();
 	      PreparedStatement pstmt = null;
@@ -107,16 +120,24 @@ public class AdminReviewDAO {
 	    	//1.커넥션얻기
 				con = dc.getCon(); 
 			//2. 쿼리문 생성객체 얻기 
-				String selectQuery = "select ";
-				pstmt = con.prepareStatement(selectQuery);
+				StringBuilder sb = new StringBuilder();
+				sb.append("select m.m_id, m.m_name, p.p_name, r.r_score, r.r_date, r.r_title,r.r_content")
+				.append("from  member m ,  product p , review r, product_img pi, ordering o")
+				.append("where (o.p_num = p.p_num) and (pi.p_num = p.p_num) and o.o_num = ?"); 
 				
-			//3. 바인드변수에 값 할당
+				pstmt = con.prepareStatement(sb.toString());
 				
-			//4. 쿼리문 수행 후 결과 얻기 
+				//3. 바인드변수에 값 할당
+				pstmt.setInt(1, o_num);
+				
+				
+				//4. 쿼리문 수행 후 결과 얻기 
 				rs = pstmt.executeQuery();
 				
+				
 				if (rs.next()) {
-					
+					rVO = new ReviewVO(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5)
+							,rs.getString(6),rs.getString(7));
 				}//end if 
 	      } finally {
 	         dc.dbClose(con, pstmt, rs);
