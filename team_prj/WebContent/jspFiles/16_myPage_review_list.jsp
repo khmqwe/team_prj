@@ -10,13 +10,13 @@
 <!-- stlye.css -->
 <link href="../common/templete/style.css" rel="stylesheet">
 <!-- bootstrap -->
-<link href="http://localhost/jsp_prj/common/bootstrap-3.3.2/css/bootstrap.min.css" rel="stylesheet"/>
+<link href="http://localhost/team_prj/common/bootstrap-3.3.2/css/bootstrap.min.css" rel="stylesheet"/>
 
 <!-- jQuery (부트스트랩의 자바스크립트 플러그인을 위해 필요합니다) -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-<script src="http://localhost/jsp_prj/common/bootstrap-3.3.2/js/bootstrap.min.js"></script>
+<script src="http://localhost/team_prj/common/bootstrap-3.3.2/js/bootstrap.min.js"></script>
 	<!-- stlye.css -->
-	<link href="http://localhost/project_2/common/css/style.css" rel="stylesheet">
+	<link href="http://localhost/team_prj/common/css/style.css" rel="stylesheet">
 <style type="text/css">
 
 </style>

@@ -8,15 +8,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title></title>
     <!-- bootstrap -->
-    <link href="http://localhost/project_2/common/bootstrap-3.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="http://localhost/team_prj/common/bootstrap-3.3.2/css/bootstrap.min.css" rel="stylesheet">
     <!-- jQuery CDN(Contents Delivery Network) -->
  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
     <!-- bootstrap -->
-    <script src="http://localhost/project_2/common/bootstrap-3.3.2/js/bootstrap.min.js"></script>
+    <script src="http://localhost/team_prj/common/bootstrap-3.3.2/js/bootstrap.min.js"></script>
     <!-- daum postcode -->
  	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<!-- stlye.css -->
-	<link href="http://localhost/project_2/common/css/style.css" rel="stylesheet">
+	<link href="http://localhost/team_prj/common/css/style.css" rel="stylesheet">
 
  <style type="text/css">
 
@@ -308,6 +308,12 @@
 		<td><input type="text" name="name" size="15"></td>
 	</tr>
 	<tr>
+		<td><label>번호</label></td>
+		<td><input type="text" name="tel1" size="4" maxlength="3"> -
+		<input type="text" name="tel2" size="4" maxlength="4"> -
+		<input type="text" name="tel3" size="4" maxlength="4"></td>
+	</tr>
+	<tr>
 		<td ><label>이메일</label></td>
 		<td><input type="text" name="email" size="15"> @
 		<input type="text" size="10">
@@ -334,7 +340,7 @@
 	</tr>
 	<tr>
 		<td colspan="2" class="center">
-		<input type="button" value="가입"  class="btn btn-success">
+		<input type="button" value="가입"  class="btn btn-success">&nbsp;&nbsp;&nbsp;&nbsp;
 		<input type="button" value="취소" class="btn btn-default">
 		</td>
 	

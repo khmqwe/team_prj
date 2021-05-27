@@ -6,15 +6,15 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
     <!-- bootstrap -->
-    <link href="http://localhost/project_2/common/bootstrap-3.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="http://localhost/team_prj/common/bootstrap-3.3.2/css/bootstrap.min.css" rel="stylesheet">
     <!-- jQuery CDN(Contents Delivery Network) -->
  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
     <!-- bootstrap -->
-    <script src="http://localhost/project_2/common/bootstrap-3.3.2/js/bootstrap.min.js"></script>
+    <script src="http://localhost/team_prj/common/bootstrap-3.3.2/js/bootstrap.min.js"></script>
     <!-- daum postcode -->
  	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<!-- stlye.css -->
-	<link href="http://localhost/project_2/common/css/style.css" rel="stylesheet">
+	<link href="http://localhost/team_prj/common/css/style.css" rel="stylesheet">
 <style type="text/css">
  .idtitle{font-size:25px;}
  #wrap{text-align: center; border:1px solid #333; width:400px;height:250px;padding:30px; margin:15px auto }

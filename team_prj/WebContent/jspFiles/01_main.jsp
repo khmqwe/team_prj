@@ -9,13 +9,13 @@
     <title></title>
 
     <!-- bootstrap -->
-    <link href="http://localhost/project_2/common/bootstrap-3.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="http://localhost/team_prj/common/bootstrap-3.3.2/css/bootstrap.min.css" rel="stylesheet">
     <!-- jQuery CDN(Contents Delivery Network) -->
  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
     <!-- bootstrap -->
-    <script src="http://localhost/project_2/common/bootstrap-3.3.2/js/bootstrap.min.js"></script>
+    <script src="http://localhost/team_prj/common/bootstrap-3.3.2/js/bootstrap.min.js"></script>
 	<!-- stlye.css -->
-	<link href="http://localhost/project_2/common/css/style.css" rel="stylesheet">
+	<link href="http://localhost/team_prj/common/css/style.css" rel="stylesheet">
 
  <style type="text/css">
 
@@ -34,7 +34,6 @@
   <ol class="carousel-indicators">
     <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
     <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-    <li data-target="#carousel-example-generic" data-slide-to="2"></li>
   </ol>
 
   <!-- Wrapper for slides -->
@@ -45,6 +44,7 @@
     <div class="item">
       <img src="http://localhost/project_2/common/images/banner2.png" >
     </div>
+
   </div>
 
   <!-- Controls -->
@@ -62,7 +62,7 @@
 	<div id="main">
 	<div id="leftSide">
 	
-<div class="btn-group" role="group" aria-label="분류">
+<div class="btn-group btn-csc" role="group" aria-label="분류">
   <button type="button" class="btn btn-default">한식</button>
   <button type="button" class="btn btn-default">중식</button>
   <button type="button" class="btn btn-default">전체</button>
@@ -160,10 +160,10 @@
 	
 	<div id="login"> <!-- 로그인창 -->
 		<!-- id 입력폼 -->	
-		<div class="form-group-lg"> 
+		<div class="form-group-lg">
 		 <label class="sr-only" for="id">input id</label>
-			<div class="input-group">
-		    <div class="input-group-addon"> 아이디 </div>
+			<div class="input-group input-fix">
+		    <div class="input-group-addon input-form"> 아이디 </div>
 		    <input type="text" class="form-control" id="id" placeholder="아이디 입력" >
 		    </div>
 		</div>
@@ -172,19 +172,24 @@
 			 <label class="sr-only" for="id">input pass</label>
 			<div class="input-group">
 		      <div class="input-group-addon">비밀번호</div>
-		      <input type="text" class="form-control" id="pass" placeholder="비밀번호 입력" >
+		      <input type="password" class="form-control" id="pass" placeholder="비밀번호 입력" >
 		      </div>
 			</div>
 				<!-- 회원가입/비밀번호 찾기 -->
-		<div style="text-align:center;">
+		<div style="text-align:center; margin-top: 22px;">
 		<span>회원가입</span>
 		<span>아이디/비밀번호찾기</span>&nbsp;&nbsp;&nbsp;  
 		<input type="button" value="로그인" class="btn btn-success btn-lg" style="width:140px;">
 		</div>
 	</div><!-- 로그인끝 -->
 	<!-- 광고영역 -->
-	<div id="ad"> </div>
-	<div id="ad2">	</div>
+	<div id="ad"> 
+		<iframe class="embed-responsive-item" width="370" height="200" scrolling="no" src="http://localhost/team_prj/common/images/ad1.gif"></iframe>
+	</div>
+
+	<div id="ad2" class="embed-responsive embed-responsive-4by3">
+  		<iframe class="embed-responsive-item" width="370" height="310" src="http://localhost/team_prj/common/images/ad2.gif"></iframe>
+	</div>
 	
 	</div> 
 	
