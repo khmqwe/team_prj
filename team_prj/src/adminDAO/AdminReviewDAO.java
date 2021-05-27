@@ -71,6 +71,8 @@ public class AdminReviewDAO {
 			 dc.dbClose(con, pstmt, rs);
 		}//end finally
 		
+		
+		
 		return list;
 	}//selectAdminReview
 	
