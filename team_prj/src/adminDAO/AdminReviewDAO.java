@@ -42,15 +42,20 @@ public class AdminReviewDAO {
 			con = dc.getCon(); 
 		//2. 쿼리문 생성객체 얻기 
 			StringBuilder sb = new StringBuilder();
-			sb.append("select m.m_id , m.m_name, r.r_title, o.o_num")
-			.append("from member m, review r, ordering o")
-			.append("(o.m_id=m.m_id) and (r.o_num = o.o_num) and (o.p_num = p.p_num) //여기 ;");
+			sb.append(" select m.m_id , m.m_name, r.r_title, o.o_num ")
+			.append(" from member m, review r, ordering o ")
+			.append(" where (o.m_id=m.m_id) and (r.o_num = o.o_num) ");
+
 			
+			//3. 바인드변수에 값 할당
+			if(option == 0 ) { // id로 검색할 때 
+				sb.append(" and m.m_id like '%?%'  " );
+				pstmt.setString(1, optionText);
+			}else if(option == 1 ){ //리뷰 내용으로 검색할 때 
+				sb.append("  r.r_title = '%?%' " );
+				pstmt.setString(1, optionText);
+			} 
 			pstmt = con.prepareStatement(sb.toString());
-			
-		//3. 바인드변수에 값 할당
-			pstmt.setInt(1, option);
-			pstmt.setString(2, optionText);
 			
 		//4. 쿼리문 수행 후 결과 얻기 
 			rs = pstmt.executeQuery();
