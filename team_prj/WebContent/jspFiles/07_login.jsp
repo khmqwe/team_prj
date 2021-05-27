@@ -47,10 +47,10 @@
 			</div>
 		<div>
           <div class="member-check">
-            <p class=""><a href="">회원이 아니신가요?</a></p>
+            <p class=""><a href="http://localhost/team_prj/jspFiles/03_signIn.jsp">회원이 아니신가요?</a></p>
           </div>
           <div>
-              <p class=""><a href="">아이디/비밀번호 찾기</a></p>
+              <p class=""><a href="http://localhost/team_prj/jspFiles/08_idFind.jsp">아이디/비밀번호 찾기</a></p>
           </div>          
 		</div>
 		</div>

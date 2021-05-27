@@ -15,7 +15,7 @@
     <!-- bootstrap -->
     <script src="http://localhost/project_2/common/bootstrap-3.3.2/js/bootstrap.min.js"></script>
 	<!-- stlye.css -->
-	<link href="http://localhost/project_2/common/css/style.css" rel="stylesheet">
+	<link href="http://localhost/team_prj/common/css/style.css" rel="stylesheet">
 
  <style type="text/css">
 
@@ -33,7 +33,7 @@
 			<h2><strong>아이디/비밀번호찾기</strong></h2><br>
 			<div class="find-menu" >
 			<ul class="nav nav-tabs nav-justified" >
-			  <li role="presentation" class="active"><a href="#">아이디찾기</a></li>
+			  <li role="presentation" class="active"><a href="http://localhost/team_prj/jspFiles/08_idFind.jsp">아이디찾기</a></li>
 			  <li role="presentation" ><a href="#" style="color:#ddd;">비밀번호찾기</a></li>
 			</ul>
 			</div>
@@ -43,13 +43,13 @@
 			</div>
 			<div class="idfind-name">
 			<label>이름</label>
-			<input type="text" placeholder="이름을 입력해주세요."class="name-text"/>
+			<input type="text" onkeyup="this.value = this.value.replace(/[^ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/g,'');" placeholder="이름을 입력해주세요."class="name-text"/>
 			</div>
 			<div class="idfind-telnum">
 			<label>휴대폰 번호</label>
-			<input type="text" class="tel-text"/> -
-			<input type="text" class="tel-text"/> -
-			<input type="text" class="tel-text"/>
+			<input type="text" onkeyup="this.value = this.value.replace(/[^0-9]/g,'');" maxlength="3"class="tel-text"/> -
+			<input type="text" onkeyup="this.value = this.value.replace(/[^0-9]/g,'');" maxlength="4"class="tel-text"/> -
+			<input type="text" onkeyup="this.value = this.value.replace(/[^0-9]/g,'');" maxlength="4"class="tel-text"/>
 			</div>
 			<br>
 			<input type="button" value="확인" class="btn btn-success btn-lg" style="width:450px; height:70px;font-weight: bold;"/>
