@@ -1,3 +1,5 @@
+<%@page import="userDAO.WriteReviewInfoVO"%>
+<%@page import="userDAO.ReviewDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -123,7 +125,17 @@ table{
 }
 
 </style>
+<%
 
+	String o_num = request.getParameter("hid_o_num");
+	ReviewDAO rDAO = ReviewDAO.getInstance();
+	WriteReviewInfoVO wriVO = null;
+	
+	if (o_num != null) {
+		wriVO = rDAO.selectReview(Integer.parseInt(o_num));
+	}
+
+%>
 <script type="text/javascript">
 
 $(function() {
@@ -143,11 +155,33 @@ $(function() {
 	 	window.close();
 	});
 	
-	$("#cancel").click(function() {
-	 	window.close();
+	$("#register").click(function() {
+		
+		if ($("#title_name").val() == "") {
+			alert("제목을 입력해주세요.");
+			$("#title_name").focus();
+			return;
+		}
+		
+		if ($("#ta_name").val() == "") {
+			alert("내용을 입력해주세요.");
+			$("#ta_name").focus();
+			return;
+		}
+		
+		goSubmit();
+		
 	});
 	
 });
+
+function goSubmit() {
+	window.opener.name = "parentPage";
+	document.reFrm.target = "parentPage";
+	document.reFrm.action="http://localhost/team_prj/jspFiles/17_myPage_purchse_list.jsp";
+	document.reFrm.submit();
+	self.close();
+}
 </script>
 
 </head>
@@ -156,12 +190,12 @@ $(function() {
 <div class="review__product">
 
 	<div class="product">
-		<img alt="상품사진" src="../common/images/img1.png" width=110px height=110px/>
-		<span class="font" style="margin-left: 20px;">상품명</span>
+		<img alt="상품사진" src="http://localhost/team_prj/common/images/food/<%= wriVO.getP_thumb_img() %>" width=110px height=110px/>
+		<span class="font" style="margin-left: 20px;"><%= wriVO.getP_name() %></span>
 	</div>
 	<div style="height: 10px; background-color: #fff; margin-top: 20px;"></div>
 </div>
-<form action="#" method="post" id="reFrm"> <!-- 폼액션 어디로 넘겨야할까요? -->
+<form method="post" id="reFrm" name="reFrm"> <!-- 폼액션 어디로 넘겨야할까요? -->
 <div class="review__score">
 	<div id="comment1">상품은 만족하셨나요?</div>
 	<div id="stars">
@@ -175,8 +209,10 @@ $(function() {
 		<label for="star-4" class="star">★</label>
 		<input type="radio" class="star" id="star-5" name="star" value="5">
 		<label for="star-5" class="star">★</label>
-		
 	</div>
+	
+	<!-- o_num 넘기기위한 hidden -->
+	<input type="hidden" name="onum" value="<%= o_num %>"/>
 	<div id="comment2">어떤점이 좋으셨나요?</div>
 </div>
 <div class="review__comment">
@@ -187,12 +223,12 @@ $(function() {
 					<div class="title__name" style="width: 100%">제목</div>
 				</td>
 				<td colspan="3">
-					<input type="text" name="title" style="width: 100%; font-size: 18px;"/>
+					<input type="text" name="title_name" id="title_name" style="width: 100%; font-size: 18px;"/>
 				</td>
 			</tr >
 			<tr>
 				<td colspan="4">
-					<textarea rows="13" cols="60" style="resize: none;"></textarea>
+					<textarea rows="13" cols="60" name="ta_name" id="ta_name" style="resize: none;"></textarea>
 				</td>
 			</tr>
 		</table>

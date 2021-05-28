@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<%@ include file="../common/jsp/common_login.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -41,7 +43,7 @@ $(document).ready(function() {
 <%@ include file="../common/template/header.jsp" %>
 <div class="mypage" style="padding-top:150px">
 	<div class="mypage__name">
-		OOO님의 마이페이지
+		<%= name %>님의 마이페이지
 	</div>
 	<div class="mypage__btn">
 		<form action="17_myPage_purchse_list.jsp" id="frm1" name="frm1">

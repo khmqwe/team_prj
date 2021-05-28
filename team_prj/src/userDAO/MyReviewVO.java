@@ -4,16 +4,18 @@ public class MyReviewVO {
 	private String p_name;
 	private int r_score;
 	private String r_title;
+	private String r_comment;
 	private String r_date;
 	
 	public MyReviewVO() {
 		
 	}
 
-	public MyReviewVO(String p_name, int r_score, String r_title, String r_date) {
+	public MyReviewVO(String p_name, int r_score, String r_title, String r_comment, String r_date) {
 		this.p_name = p_name;
 		this.r_score = r_score;
 		this.r_title = r_title;
+		this.r_comment = r_comment;
 		this.r_date = r_date;
 	}
 
@@ -47,6 +49,14 @@ public class MyReviewVO {
 
 	public void setR_date(String r_date) {
 		this.r_date = r_date;
+	}
+
+	public String getR_comment() {
+		return r_comment;
+	}
+
+	public void setR_comment(String r_comment) {
+		this.r_comment = r_comment;
 	}
 	
 }

@@ -1,5 +1,9 @@
+<%@page import="userDAO.MyReviewVO"%>
+<%@page import="java.util.List"%>
+<%@page import="userDAO.ReviewDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ include file="../common/jsp/common_login.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,6 +25,30 @@
 
 </style>
 
+<%
+
+	ReviewDAO rDAO = ReviewDAO.getInstance();
+	
+	List<MyReviewVO> mrList = rDAO.selectMyReviewList(id);
+	
+	int pageCnt = mrList.size() / 4;
+	if ((mrList.size() / 4) != 0 && (mrList.size() % 4) != 0) {
+		pageCnt += 1;
+	}
+	
+	String curPage = "1";
+	int curPageInt = 1;
+	if (request.getParameter("page") != null) {
+		curPage = request.getParameter("page");
+		curPageInt = Integer.parseInt(curPage);
+	}
+	
+	int listLen = 4;
+	if (pageCnt == curPageInt) {
+		listLen = mrList.size() - ((curPageInt-1) * 4);
+	}
+
+%>
 <script type="text/javascript">
 $(document).ready(function () {
 	$(".reviewBox").each(function() {
@@ -40,6 +68,7 @@ $(document).ready(function () {
 		btn_more.click(toggle_content);
 		
 		function toggle_content() {
+			
 			if ($(this).hasClass('short')) {
 				$(this).html('더보기');
 				content.html(text_short);
@@ -49,8 +78,16 @@ $(document).ready(function () {
 				content.html(text);
 				$(this).addClass('short');
 			}
+			var h = $("#menu__right").height() + 30;
+			$("#mypage").css("height", h);
 		}
 	});
+	
+	if ($("#menu__right").height() > $("#mypage").height()) {
+		var h = $("#menu__right").height() + 30;
+		$("#mypage").css("height", h)
+	}
+	
 });
 </script>
 
@@ -59,7 +96,7 @@ $(document).ready(function () {
 <!--header-->
 <%@ include file="../common/template/header.jsp" %>
 
-<div class="mypage">
+<div class="mypage" id="mypage">
 	<div class="menu__left">
 		<div class="menu__left__name">
 		My Page
@@ -72,69 +109,45 @@ $(document).ready(function () {
 			</ul>
 		</div>
 	</div>
-	<div class="menu__right">
+	<div class="menu__right" id="menu__right">
 		<div class="p__name">
 			<h2> <strong>나의 상품후기</strong> </h2> <br>
 		</div>
 		<div class="p__table">
 			<table class="table" style="border-bottom: 1px solid #dfdfdf; ">
+			<% for(int i = (curPageInt - 1)*4; i < (curPageInt - 1)*4 + listLen; i++) { %>
 				<tr>
-					<td style="white-space:nowrap;">구매상품제목<br/>
+					<td style="white-space:nowrap;"><%= mrList.get(i).getP_name() %><br/>
+					<% int empty = 5 - mrList.get(i).getR_score(); %>
+					<% for (int j = 0; j < mrList.get(i).getR_score(); j++) { %>
 					<span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-					<span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-					<span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-					<span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+					<% } %>
+					<% for (int j = 0; j < empty; j++) { %>
 					<span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
+					<% } %>
 					</td>
-					<td class="review" style="vertical-align: middle; width: 600px;">리뷰 제목</td>
-					<td style="text-align: right; vertical-align: middle;">2021.04.11</td>
-				</tr>
-				<tr>
-					<td style="vertical-align: middle;">구매상품제목<br/>
-					<span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-					<span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-					<span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-					<span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
-					<span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
-					</td>
-					<td class="review" style="vertical-align: middle; width: 600px;">
+					<td class="review" style="vertical-align: middle; width: 600px;"><%= mrList.get(i).getR_title() %><br/>
 					<div class="reviewBox">
 						<div class="review-text">
-						리뷰 내용리뷰 내용리뷰 내용리뷰 내용리뷰 내용리뷰 내용리뷰 내용리뷰 
-						내용리뷰 내용리뷰 내용리뷰 내용리뷰 내용리뷰 내용리뷰 내용리뷰 내용리뷰 내용리뷰 내용리뷰 내용리뷰 내용리뷰 내용리뷰 내용리뷰 내용리뷰 내용리뷰 내용리뷰 
-						내용리뷰 내용리뷰 내용리뷰 내용내용리뷰 내용내용리뷰 내용내용리뷰 내용내용리뷰 내용내용리뷰 내용
-						내용리뷰 내용내용리뷰 내용내용리뷰 내용내용리뷰 내용내용리뷰 내용내용리뷰 내용내용리뷰 내용내용리뷰 내용내용리뷰 내용
-						내용리뷰 내용내용리뷰 내용내용리뷰 내용내용리뷰 내용내용리뷰 내용내용리뷰 내용내용리뷰 내용내용리뷰 내용
-						내용리뷰 내용내용리뷰 내용내용리뷰 내용내용리뷰 내용내용리뷰 내용내용리뷰 내용
+							<%= mrList.get(i).getR_comment() %>
 						</div>
-					</div>
+					</div> 
 					</td>
-					<td style="text-align: right; vertical-align: middle;">2021.05.01</td>
+					<td style="text-align: right; vertical-align: middle; width: 120px;"><%= mrList.get(i).getR_date().substring(0, mrList.get(i).getR_date().indexOf(" ")).replaceAll("-", ".") %> </td>
 				</tr>
+			<% } %>
 			</table>
 		</div>
 		<div class="p__list">
 			<ul class="pagination">
-			    <li>
-			      <a href="#" aria-label="Previous">
-			        <span aria-hidden="true" style="color: #3B8841">&laquo;</span>
-			      </a>
-			    </li>
-			    <li><a href="#" style="color: #3B8841">1</a></li>
-			    <li><a href="#" style="color: #3B8841">2</a></li>
-			    <li><a href="#" style="color: #3B8841">3</a></li>
-			    <li><a href="#" style="color: #3B8841">4</a></li>
-			    <li>
-			      <a href="#" aria-label="Next">
-			        <span aria-hidden="true" style="color: #3B8841">&raquo;</span>
-			      </a>
-			    </li>
+				<% for (int i = 0; i < pageCnt; i++) { %>
+				    <li><a href="http://localhost/team_prj/jspFiles/16_myPage_review_list.jsp?page=<%= i+1 %>" style="color: #3B8841"><%=i+1 %></a></li>
+				<% } %>
 			</ul>
 		</div>
 	</div>
-
-</div>
 <!--footer-->
+</div>
 <%@ include file="../common/template/footer.jsp" %>
 </body>
 </html>

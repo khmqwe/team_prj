@@ -1,7 +1,15 @@
+<%@page import="userDAO.WriteReviewVO"%>
+<%@page import="userDAO.ReviewDAO"%>
+<%@page import="userDAO.OrderDateVO"%>
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="userDAO.OrderVO"%>
+<%@page import="java.util.List"%>
+<%@page import="userDAO.OrderDAO"%>
 <%@page import="java.util.Arrays"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ include file="../common/jsp/common_login.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,47 +28,101 @@
 
 </style>
 
-<script type="text/javascript">
-$(function() {
-	$("input[name=write_review]").click(function() {
-		window.open("18_pop_review.jsp","idchk","width=600px,height=800px");
-	});
-});
-</script>
-
-</head>
-<body>
 <%
+	request.setCharacterEncoding("UTF-8");	
+
+	OrderDAO oDAO = OrderDAO.getInstance();
+	List<OrderVO> oList = null;
+	if (request.getParameter("calStart") == null) {
+		oList = oDAO.selectOrderList(id);
+	} else {
+		String calStart = request.getParameter("calStart").replaceAll("-", "");
+		String calEnd = request.getParameter("calEnd").replaceAll("-", "");
+		OrderDateVO odVO = new OrderDateVO(id, calStart, calEnd);
+		oList = oDAO.selectOrderDateList(odVO);
+	}
 	String pageNum = request.getParameter("p");
-	final int LEN = 2;
+	final int LEN = 4;
 	if (pageNum == null) {
 		pageNum = "0";
 	}
 	
-	int pageIntNum = 2 * Integer.parseInt(pageNum);
+	int pageIntNum = 4 * Integer.parseInt(pageNum);
 	
-	String id = request.getParameter("hid_id");
-	String[] img = {"icon1.png", "icon2.png", "icon3.png", "img1.png", "img2.png"};
-	String[] name = {"닭갈비", "왕돈까스", "매운카레", "호호호떡", "맛난곱창"};
-	String[] price = {"12900", "8900", "6000", "3300", "11900"};
-	String[] date = {"2021.05.10", "2021.04.23", "2021.04.20", "2021.04.19", "2021.04.02"};
-	
-	int end = (pageIntNum + LEN < name.length)? LEN: name.length-pageIntNum;
+	int end = (pageIntNum + LEN < oList.size())? LEN: oList.size()-pageIntNum;
 	String[] img_v = new String[end];
 	String[] name_v = new String[end];
-	String[] price_v = new String[end];
+	boolean[] flag_v = new boolean[end];
+	int[] price_v = new int[end];
 	String[] date_v = new String[end];
 	
+	
 	for (int i = pageIntNum, j = 0; i < pageIntNum + end; i++, j++) {
-		img_v[j] = img[i];
-		name_v[j] = name[i];
-		price_v[j] = price[i];
-		date_v[j] = date[i];
+		img_v[j] = oList.get(i).getP_thumb_img();
+		name_v[j] = oList.get(i).getP_name();
+		flag_v[j] = oList.get(i).getFlag();
+		price_v[j] = oList.get(i).getP_price() * oList.get(i).getO_cnt();
+		date_v[j] = oList.get(i).getO_date().substring(0, oList.get(i).getO_date().indexOf(" "));
 	}
 	
-	int page_length = (int)Math.ceil(name.length / 2.0);
-	
+	int page_length = (oList.size() / LEN);
+	if ((oList.size() % LEN != 0) && (oList.size() / LEN != 0)) {
+		page_length += 1;
+	}
 %>
+
+<%
+
+	//팝업창에서 받은값 확인
+	String title = request.getParameter("title_name");
+	String comment = request.getParameter("ta_name");
+	
+	if (title != null) {
+		ReviewDAO rDAO = ReviewDAO.getInstance();
+		String onum = request.getParameter("onum");
+		String score = request.getParameter("star");
+		if (score == null) {
+			score = "0";
+		}
+		out.print(onum + " / " + score + " / " + title + " / " + comment);
+		WriteReviewVO wrVO = new WriteReviewVO(Integer.parseInt(onum), title, comment, Integer.parseInt(score));
+		
+		rDAO.insertReview(wrVO);
+		response.sendRedirect("http://localhost/team_prj/jspFiles/17_myPage_purchse_list.jsp");
+	}
+	
+
+%>
+
+<script type="text/javascript">
+$(function() {
+	
+	$("#btnCal").click(function() {
+		if($("#calStart").val() == "" || $("#calEnd").val() == "") {
+			alert("날짜를 정확히 입력해주세요.");
+			return;
+		}
+		$("#frmCal").submit();
+	});
+	
+	
+});
+
+function btnClick(o_num) {
+	
+	var frmHid = document.frmHid;
+	window.open("" ,"popupWindow","width=600px,height=800px");
+	frmHid.hid_o_num.value = o_num;
+	frmHid.target="popupWindow";
+	frmHid.method="post";
+	frmHid.action = "http://localhost/team_prj/jspFiles/18_pop_review.jsp";
+	frmHid.submit();
+}
+</script>
+
+</head>
+<body>
+
 <!--header-->
 <%@ include file="../common/template/header.jsp" %>
 <div class="mypage">
@@ -78,15 +140,11 @@ $(function() {
 	</div>
 	<div class="menu__right">
 		<div class="p__lookup">
-		<form class="form-inline">
-			<input style="width: 80px;" type="text" placeholder="년" class="input form-control"/>년&nbsp;&nbsp;
-			<input style="width: 60px;" type="text" placeholder="월" class="input form-control"/>월&nbsp;&nbsp;
-			<input style="width: 60px;" type="text" placeholder="일" class="input form-control"/>일 
-			&nbsp;~&nbsp;
-			<input style="width: 80px;" type="text" placeholder="년" class="input form-control"/>년&nbsp;&nbsp;
-			<input style="width: 60px;" type="text" placeholder="월" class="input form-control"/>월&nbsp;&nbsp;
-			<input style="width: 60px;" type="text" placeholder="일" class="input form-control"/>일
-			<input type="button" value="조회하기" class="btn_lookup btn btn-default"/>
+		<form action="http://localhost/team_prj/jspFiles/17_myPage_purchse_list.jsp" class="form-inline" id="frmCal">
+			<input type="date" id="calStart" name="calStart"/>
+			&nbsp;&nbsp;&nbsp;~&nbsp;&nbsp;&nbsp;
+			<input type="date" id="calEnd" name="calEnd"/>
+			<input type="button" value="조회하기" id="btnCal" class="btn_lookup btn btn-default"/>
 		</form>
 		</div>
 		<div class="p__name">
@@ -95,17 +153,22 @@ $(function() {
 		<div class="p__table">
 			<table class="table" style="border-bottom: 1px solid #dfdfdf;">
 				<% for (int i = 0; i < name_v.length; i++) { %>
-				
 				<tr>
-					<td style="text-align: center;"><img alt="상품사진" src="../common/images/<%= img_v[i] %>" class="p__img"/></td>
-					<td style="vertical-align: middle;"><%= name_v[i] %><br/><%= price_v[i] %>원</td>
+					<td style="text-align: center;"><img alt="상품사진" src="http://localhost/team_prj/common/images/food/<%= img_v[i] %>" class="p__img"/></td>
+					<td style="vertical-align: middle; width: 500px;"><%= name_v[i] %><br/><%= price_v[i] %>원</td>
 					<td style="vertical-align: middle;">구매일자<br/><%= date_v[i] %></td>
-					<td style="vertical-align: middle;"><input type="button" value="후기쓰기" class="btn btn-default" name="write_review"></td>
+					<td style="vertical-align: middle;">
+					<% if (!flag_v[i]) { %>
+							<input type="button" value="후기쓰기" class="btn btn-default" name="write_review" id="write_review" onclick="btnClick('<%= oList.get(i).getO_num() %>')"/>
+					<% } %>
+					</td>
 				</tr>
-				
 				<% } %>
 				
 			</table>
+			<form name="frmHid">
+				<input type="hidden" name="hid_o_num" id="hid_o_num"/>
+			</form>
 		</div>
 		<div class="p__list">
 			<ul class="pagination">

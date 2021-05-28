@@ -8,9 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import adminDAO.DbConnection;
-import userDAO.MyReviewVO;
-import userDAO.WriteReviewInfoVO;
-import userDAO.WriteReviewVO;
 
 public class ReviewDAO {
 
@@ -43,7 +40,7 @@ public class ReviewDAO {
 			con = dc.getCon();
 			
 			StringBuilder sb = new StringBuilder();
-			sb.append("select p_name, r.r_score , r.r_title, r.r_date ")
+			sb.append("select p_name, r.r_score , r.r_title, r.r_content, r.r_date ")
 			.append(" from member m, ordering o, review r, product p ")
 			.append(" where   (o.m_id = m.m_id) and (r.o_num = o.o_num) and (o.p_num = p.p_num) and m.m_id = ? ");
 			
@@ -56,7 +53,7 @@ public class ReviewDAO {
 			MyReviewVO mrVO = null;
 			
 			while (rs.next()) {
-				mrVO = new MyReviewVO(rs.getString(1), rs.getInt(2), rs.getString(3), rs.getString(4));
+				mrVO = new MyReviewVO(rs.getString(1), rs.getInt(2), rs.getString(3), rs.getString(4), rs.getString(5));
 				list.add(mrVO);
 			}
 		} finally {
@@ -79,14 +76,13 @@ public class ReviewDAO {
 			
 			StringBuilder sb = new StringBuilder();
 			sb.append(" insert into review(o_num, r_title, r_content, r_date, r_score) ")
-			.append(" values(?,?,?,?,?)");
+			.append(" values(?,?,?, sysdate,?)");
 			
 			pstmt = con.prepareStatement(sb.toString());
 			pstmt.setInt(1, wrVO.getO_num());
 			pstmt.setString(2, wrVO.getR_title());
 			pstmt.setString(3, wrVO.getR_content());
-			pstmt.setString(4, "sysdate");
-			pstmt.setInt(5, wrVO.getR_score());
+			pstmt.setInt(4, wrVO.getR_score());
 			
 			pstmt.executeUpdate();
 			
