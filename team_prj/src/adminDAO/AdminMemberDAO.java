@@ -47,9 +47,9 @@ public static AdminMemberDAO getInstance() {
 			con = dc.getCon();
 			
 			StringBuilder sb = new StringBuilder();
-			sb.append("select m_id, m_name , m_date, ");
-			//.append();//???????????????????????
-			
+			sb.append("select m_id, m_name , m_date ")
+			.append("  from  member ")
+			.append("  where m_id =? ");
 			pstmt = con.prepareStatement(sb.toString());
 			
 			pstmt.setString(1, optionText);
@@ -59,7 +59,7 @@ public static AdminMemberDAO getInstance() {
 			AdminMemberVO amVO = null;
 			
 			while (rs.next()) {
-			//모르겠음 ㅜㅜ	amVO = new AdminMemberVO(rs.getString(1), rs.getInt(2), rs.getString(3));
+			amVO = new AdminMemberVO(rs.getString(1), rs.getString(2), rs.getString(3));
 				list.add(amVO);
 			}//end while
 		}finally {

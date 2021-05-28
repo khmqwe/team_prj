@@ -1,19 +1,20 @@
 package userDAO;
 
 public class ProductVO {
-	private String p_name,p_cooktime,p_amount,p_main_img,s_key;
+	private String p_name,p_cooktime,p_amount,p_main_img,s_type;
 	private int p_price;
 	
 	public ProductVO() {
 		
 	}
 
-	public ProductVO(String p_name, String p_cooktime, String p_amount, String p_main_img, String s_key, int p_price) {
+	public ProductVO(String p_name, String p_cooktime, String p_amount, String p_main_img, String s_type, int p_price) {
+		super();
 		this.p_name = p_name;
 		this.p_cooktime = p_cooktime;
 		this.p_amount = p_amount;
 		this.p_main_img = p_main_img;
-		this.s_key = s_key;
+		this.s_type = s_type;
 		this.p_price = p_price;
 	}
 
@@ -49,12 +50,12 @@ public class ProductVO {
 		this.p_main_img = p_main_img;
 	}
 
-	public String getS_key() {
-		return s_key;
+	public String getS_type() {
+		return s_type;
 	}
 
-	public void setS_key(String s_key) {
-		this.s_key = s_key;
+	public void setS_type(String s_type) {
+		this.s_type = s_type;
 	}
 
 	public int getP_price() {
@@ -64,5 +65,6 @@ public class ProductVO {
 	public void setP_price(int p_price) {
 		this.p_price = p_price;
 	}
-
+ 
+	
 }

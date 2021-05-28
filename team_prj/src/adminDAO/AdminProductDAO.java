@@ -47,7 +47,9 @@ public static AdminProductDAO getInstance() {
 			con = dc.getCon();
 			
 			StringBuilder sb = new StringBuilder();
-			sb.append("select m_id, m_name , m_date, ");
+			sb.append("select p_thumb_img, p_name, p_num ")
+			.append("  from  producting pi, product p")
+			.append(" where (pi.p_num = p.p_num) = ? ");
 			
 			pstmt = con.prepareStatement(sb.toString());
 			
@@ -58,7 +60,7 @@ public static AdminProductDAO getInstance() {
 			MainManagerVO mmVO = null;
 			
 			while (rs.next()) {
-			//모르겠음 ㅜㅜ mmVO = new AdminMemberVO(rs.getString(1), rs.getInt(2), rs.getString(3));
+			mmVO = new MainManagerVO(rs.getString(1), rs.getString(2), rs.getInt(3));
 				list.add(mmVO);
 			}//end while
 		}finally {
