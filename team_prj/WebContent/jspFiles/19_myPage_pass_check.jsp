@@ -22,7 +22,11 @@
 </style>
 
 <script type="text/javascript">
-
+$(function() {
+	 $("#submitBtn").click(function() {
+		 $("#passFrm").submit();
+	 });
+});//ready
 </script>
 
 </head>
@@ -36,10 +40,13 @@
 	<h3> <strong>회원님의 개인정보를 안전하게 보호하기 위해<br/><br/>
 	<span style="color: #DC1437;">인증 후 변경이 가능</span>합니다.</strong> </h3> <br>
 	<br>
-	<div class="content__inputpass"> <input type="password" placeholder="비밀번호를 입력해주세요."/> </div>
-	<input type="button" value="확인" class="btn btn-success" style="width: 200px;"/>
-	</div>
-
+	
+	<form action="20_myPage_modify_info.jsp" method="post" id="passFrm"> 
+	<div class="content__inputpass"> <input type="password" placeholder="비밀번호를 입력해주세요." id="pass"/> </div>
+	<input type="button" value="확인" id="submitBtn" class="btn btn-success" style="width: 200px;"/>
+	</form>
+	
+</div>
 </div>	
 <!--footer-->
 <%@ include file="../common/template/footer.jsp" %>

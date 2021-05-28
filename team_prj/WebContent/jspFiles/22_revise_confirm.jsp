@@ -23,7 +23,11 @@
 </style>
 
 <script type="text/javascript">
-
+$(function() {
+	 $("#submitBtn").click(function() {
+		 location.href="15_myPage_main.jsp";
+	 });
+});//ready
 </script>
 <!--header-->
 <%@ include file="../common/template/header.jsp" %>
@@ -33,7 +37,7 @@
 	
 	<h2> <strong>회원정보가 수정되었습니다.</strong> </h2> <br>
 	<br>
-	<input type="button" value="확인" class="btn btn-success "/>
+	<input type="button" id="submitBtn" value="확인" class="btn btn-success "/>
 	</div>
 
 </div>	
