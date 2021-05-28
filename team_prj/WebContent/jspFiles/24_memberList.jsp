@@ -25,7 +25,13 @@
 
 </style>
 <script type="text/javascript">
-
+$(function() {
+	$("#modify_btn").click(function() {
+		location.href="25_memberManage.jsp";
+	});
+	
+	
+});
 </script>
 </head>
 <body>
@@ -34,9 +40,23 @@
 <div class = "container">
 
 	<div class = "left_bar">
-		<div class = "left_box"><button type="button" class="btn btn-default" style = " width : 150px; height : 50px; font-size: 22px; font-weight: bold; border-radius: 7px;">상품관리</button></div>
-		<div class = "left_box"><button type="button" class="btn btn-default" style = " width : 150px; height : 50px; font-size: 22px; font-weight: bold; border-radius: 7px;">리뷰관리</button></div>
-		<div class = "left_box"><button type="button" class="btn btn-default" style = " width : 150px; height : 50px; font-size: 22px; font-weight: bold; border-radius: 7px;">회원관리</button></div>
+		<div class = "left_box" >
+		<a href="27_productList.jsp"> 
+		<button type="button" class="btn btn-default" style = " width : 150px; height : 50px; font-size: 22px; font-weight: bold; border-radius: 7px;">상품관리</button>
+		</a>
+		</div>
+		
+		<div class = "left_box">
+		<a href="31_reviewList.jsp"> 
+		<button type="button" class="btn btn-default" style = " width : 150px; height : 50px; font-size: 22px; font-weight: bold; border-radius: 7px;">리뷰관리</button>
+		</a>
+		</div>
+		
+		<div class = "left_box">
+		<a href="24_memberList.jsp"> 
+		<button type="button" class="btn btn-default" style = " width : 150px; height : 50px; font-size: 22px; font-weight: bold; border-radius: 7px;">회원관리</button>
+		</a>
+		</div>
 		<div class = "logout"><button type="button" class="btn btn-default" style = " width : 120px; height : 40px; font-weight: bold;">관리자로그아웃</button></div>
 	</div>
 	
@@ -63,57 +83,16 @@
 				<td width = 200px;>회원가입일</td>
 				<td width = 80px;>관리</td>
 			</tr>
+			<%for(int i=0;i<8;i++){ %>
 			<tr>
-				<td>7</td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td><input type = "button" value = "수정" class = "btn btn-primary" ></td>
+				<td><%=i%></td>
+				<td>아이디 값</td>
+				<td> 이름 값 </td>
+				<td>회원가입일</td>
+				<td><input type = "button" value = "수정" class = "btn btn-primary" id="modify_btn" ></td>
 			</tr>
-			<tr>
-				<td>6</td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td><input type = "button" value = "수정" class = "btn btn-primary" ></td>
-			</tr>
-			<tr>
-				<td>5</td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td><input type = "button" value = "수정" class = "btn btn-primary"></td>
-			</tr>
-			<tr>
-				<td>4</td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td><input type = "button" value = "수정" class = "btn btn-primary"></td>
-			</tr>
-			<tr>
-				<td>3</td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td><input type = "button" value = "수정" class = "btn btn-primary" ></td>
-			</tr>
-			<tr>
-				<td>2</td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td><input type = "button" value = "수정" class = "btn btn-primary"></td>
-			</tr>
-			<tr>
-				<td>1</td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td><input type = "button" value = "수정" class = "btn btn-primary"></td>
-			</tr>
+			<%} %>
 			
-		
 			</table>
 		</div>
 		

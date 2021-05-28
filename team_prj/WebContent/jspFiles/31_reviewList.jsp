@@ -24,19 +24,42 @@
 </style>
 
 <script type="text/javascript">
-
+$(function() {
+	$("#reBtn").click(function() {
+		
+	});
+	
+	
+});
 </script>
 </head>
 <body>
 <div class = "container">
 
 	<div class = "left_bar">
-		<div class = "left_box"><button type="button" class="btn btn-default" style = " width : 150px; height : 50px; font-size: 22px; font-weight: bold; border-radius: 7px;">상품관리</button></div>
-		<div class = "left_box"><button type="button" class="btn btn-default" style = " width : 150px; height : 50px; font-size: 22px; font-weight: bold; border-radius: 7px;">리뷰관리</button></div>
-		<div class = "left_box"><button type="button" class="btn btn-default" style = " width : 150px; height : 50px; font-size: 22px; font-weight: bold; border-radius: 7px;">회원관리</button></div>
+		
+		<div class = "left_box" >
+		<a href="27_productList.jsp"> 
+		<button type="button" class="btn btn-default" style = " width : 150px; height : 50px; font-size: 22px; font-weight: bold; border-radius: 7px;">상품관리</button>
+		</a>
+		</div>
+		
+		
+		<div class = "left_box">
+		<a href="31_reviewList.jsp"> 
+		<button type="button" class="btn btn-default" style = " width : 150px; height : 50px; font-size: 22px; font-weight: bold; border-radius: 7px;">리뷰관리</button>
+		</a>
+		</div>
+		
+		<div class = "left_box">
+		<a href="24_memberList.jsp"> 
+		<button type="button" class="btn btn-default" style = " width : 150px; height : 50px; font-size: 22px; font-weight: bold; border-radius: 7px;">회원관리</button>
+		</a>
+		</div>
+		
 		<div class = "logout"><button type="button" class="btn btn-default" style = " width : 120px; height : 40px; font-weight: bold;">관리자로그아웃</button></div>
 	</div>
-	
+		<form action="31_reviewList.jsp" method="post" id="reFrm" >
 	<div class = "right_bar">
 		<div><h1 style= "font-weight: bold;">리뷰관리</h1></div>
 		<div><hr class = "hr_a"/><br/></div>
@@ -46,10 +69,11 @@
 				<option value = "w_id">작성자아이디</option>
 				<option value = "w_title">제목</option>
 			</select>
-			 <input type="text" style = "width : 150px; height : 35px;"  />
-			 <input type="button" class = "btn btn-primary" value = "검색" style = "width : 100px; height : 35px; font-size: 18px; "/><br/>
+			 <input type="text"  id="reSearch" name="reSearch" style = "width : 150px; height : 35px;"  />
+			 <input type="button" id="reBtn" name="reBtn" class = "btn btn-primary" value = "검색" style = "width : 100px; height : 35px; font-size: 18px; "/><br/>
 		</div>
 		
+	
 	<div class = "table">
 			<table border = "1" cellspacing = "0" bordercolor = "#B4B4B4" class = "table table-striped"
 			 style = "width : 800px ; height : 500px ; margin: auto ">
@@ -130,7 +154,7 @@
 			</ul>
 		</nav>
 	</div>
-
+	</form>
 
 </div>
 </body>
