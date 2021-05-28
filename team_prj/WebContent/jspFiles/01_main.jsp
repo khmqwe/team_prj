@@ -39,7 +39,9 @@
   <!-- Wrapper for slides -->
   <div class="carousel-inner" role="listbox">
     <div class="item active">
+    <a href="https://www.naver.com">
       <img src="http://localhost/project_2/common/images/banner1.png" >
+    </a>
     </div>
     <div class="item">
       <img src="http://localhost/project_2/common/images/banner2.png" >

@@ -1,3 +1,10 @@
+<%@page import="adminDAO.AdminReviewVO"%>
+<%@page import="kr.co.sist.util.cipher.DataEncrypt"%>
+<%@page import="adminDAO.AdminReviewDAO"%>
+<%@page import="adminDAO.LoginVO"%>
+<%@page import="adminDAO.AdminLoginDAO"%>
+<%@page import="userDAO.ProductReviewVO"%>
+<%@page import="userDAO.ProductVO"%>
 <%@page import="userDAO.MainVO"%>
 <%@page import="java.util.List"%>
 <%@page import="userDAO.UserPageDAO"%>
@@ -51,7 +58,51 @@ String id = mDAO.selectFindId(fiVO);
 	<img alt="사진" src="http://localhost/team_prj/common/images/food/<%= vo.getP_thumb_img() %>" width=200 height=200>
 	 <%= vo.getP_name() %> <%= vo.getP_num() %> <%= vo.getT_type() %> <br/>
 	
-<% } %>
+	<% } 
+	
+	ProductVO pVO = upDAO.selectProduct(1);
+	
+	%>
+	<br/>
+	---------------------------------------------------------------------
+	<br/>
+	<%= pVO.getP_name() %> <%= pVO.getP_amount() %> <%= pVO.getP_cooktime() %> <%= pVO.getP_main_img() %> <%= pVO.getP_price() %> <%= pVO.getS_key() %>
+	<br/>
+	<br/>
+	---------------------------------------------------------------------
+	<br/>
+	<%
+		List<ProductReviewVO> list2 = upDAO.selectReviewList(3);
+	
+		for (ProductReviewVO vo: list2) { %>
+		
+		<%= vo.getR_title() %>/ <%= vo.getR_content() %>/ <%= vo.getR_score() %>점/ <%= vo.getR_date() %> <br/>
+	<% } %>
+	<br/>
+	---------------------------------------------------------------------
+	<br/>
+	
+	<%
+		AdminLoginDAO alDAO = AdminLoginDAO.getInstance();
+	
+		LoginVO lVO = new LoginVO("admin", "ad123");
+	
+		boolean chk = alDAO.selectLogin(lVO);
+	%>
+	<%= chk %> <br/>
+	<br/>
+	---------------------------------------------------------------------
+	<br/>
+	<%
+	AdminReviewDAO arDAO = AdminReviewDAO.getInstance();
+		
+	List<AdminReviewVO> list3 = arDAO.selectAdminReview(1, "맛");
+	
+	for (AdminReviewVO aVO : list3) {%>
+	
+	<%= aVO.getM_name() %>
+	<% } %>
+
 </div>
 </body>
 </html>
