@@ -20,7 +20,11 @@
 
  </style>
  <script type="text/javascript">
- 
+ $(function() {
+	 $("#loginBtn").click(function() {
+		location.href="07_login.jsp"
+ 	 });
+ });
  </script>
 </head>
 <body>
@@ -32,7 +36,7 @@
 	<div class="submitPage">
 	<h2> <strong>등록하신 비밀번호는 OOO 입니다.</strong> </h2> <br>
 	로그인 후에 서비스를 이용할 수 있습니다. <br><br>
-	<input type="button" value="로그인" class="btn btn-success"/>
+	<input type="button" id="loginBtn" value="로그인" class="btn btn-success"/>
 	</div>
 
 </div>

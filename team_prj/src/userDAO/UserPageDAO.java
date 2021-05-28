@@ -54,6 +54,7 @@ public static UserPageDAO getInstance() {
 			}
 			
 			
+			
 			rs = pstmt.executeQuery();
 			
 			MainVO mVO = null;
@@ -87,9 +88,12 @@ public static UserPageDAO getInstance() {
 			con = dc.getCon();
 			
 			StringBuilder sb = new StringBuilder();
+			sb.append("select p.p_name, p_cooktime, p_amount, p_main_img, s_type, p_price ")
+			.append(" from product p, product_img pi ")
+			.append(" where (pi.p_num = p.p_num) and p.p_num=? ");
 			sb.append("select p_name, p_cooktime, p_amount, s_key, p_main_img, p_price ");
-			//.append(" from ordering o, product p, product_img pi ")
-			//.append(" where (o.p_num = p.p_num) and (pi.p_num = p.p_num) and o.o_num = ? ");
+			//.append( " from product p, product_img pi, type t ")
+			//.append(" where  = ? ");
 			
 			pstmt = con.prepareStatement(sb.toString());
 			
@@ -120,26 +124,26 @@ public static UserPageDAO getInstance() {
 		try {
 			con = dc.getCon();
 			StringBuilder sb = new StringBuilder();
-			sb.append("select r_title, r_content, r_date, r_score  ");
-			//.append(" from member m, ordering o, product p, product_img pi ")
-			//.append(" where (o.m_id = m.m_id) and (o.p_num = p.p_num) and (pi.p_num = p.p_num) and m.m_id = ? ");
+			sb.append("select r_title, r_content, r_date, r_score ")
+			.append(" from product p, review r, ordering o ")
+			.append(" where (o.p_num = p.p_num) and (r.o_num = o.o_num) and p.p_num=? ");
+			sb.append("select r_title, r_content, r_date, r_score  ")
+			.append(" from review r ,")
+			.append(" where (o.m_id = m.m_id) and (o.p_num = p.p_num) and (pi.p_num = p.p_num) and m.m_id = ? ");
 			
 			pstmt = con.prepareStatement(sb.toString());
 			pstmt.setInt(1, p_num);
-			
+
 			rs = pstmt.executeQuery();
 			
 			ProductReviewVO prVO = null;
-			int result = 0;
 			
 			while (rs.next()) {
 				prVO = new ProductReviewVO(rs.getString(1), rs.getString(2),
 						rs.getString(3), rs.getInt(4));
 				
-				//result = selectExistReview(mVO.getP_num());
-				
 				list.add(prVO);
-				result = 0;
+				
 			}//end while
 			
 		} finally {
@@ -161,8 +165,8 @@ public static UserPageDAO getInstance() {
 			con = dc.getCon();
 			
 			StringBuilder sb = new StringBuilder();
-			sb.append("select p_detailes_img, p_explain ");
-			//.append(" from ordering o, product p, product_img pi ")
+			sb.append("select p_detailes_img, p_explain ")
+			.append("from product p ,product_img pi ");
 			//.append(" where (o.p_num = p.p_num) and (pi.p_num = p.p_num) and o.o_num = ? ");
 			
 			pstmt = con.prepareStatement(sb.toString());

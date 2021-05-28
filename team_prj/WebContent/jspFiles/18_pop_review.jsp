@@ -139,6 +139,14 @@ $(function() {
 		$('#ta').html(txt);
 	});
 	
+	$("#cancel").click(function() {
+	 	window.close();
+	});
+	
+	$("#cancel").click(function() {
+	 	window.close();
+	});
+	
 });
 </script>
 
@@ -146,13 +154,14 @@ $(function() {
 <body>
 <div id="review">
 <div class="review__product">
+
 	<div class="product">
 		<img alt="상품사진" src="../common/images/img1.png" width=110px height=110px/>
 		<span class="font" style="margin-left: 20px;">상품명</span>
 	</div>
 	<div style="height: 10px; background-color: #fff; margin-top: 20px;"></div>
 </div>
-<form action="">
+<form action="#" method="post" id="reFrm"> <!-- 폼액션 어디로 넘겨야할까요? -->
 <div class="review__score">
 	<div id="comment1">상품은 만족하셨나요?</div>
 	<div id="stars">
