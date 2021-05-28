@@ -1,3 +1,7 @@
+<%@page import="adminDAO.MainManagerVO"%>
+<%@page import="adminDAO.AdminProductDAO"%>
+<%@page import="adminDAO.AdminMemberVO"%>
+<%@page import="adminDAO.AdminMemberDAO"%>
 <%@page import="adminDAO.AdminReviewVO"%>
 <%@page import="kr.co.sist.util.cipher.DataEncrypt"%>
 <%@page import="adminDAO.AdminReviewDAO"%>
@@ -66,7 +70,7 @@ String id = mDAO.selectFindId(fiVO);
 	<br/>
 	---------------------------------------------------------------------
 	<br/>
-	<%= pVO.getP_name() %> <%= pVO.getP_amount() %> <%= pVO.getP_cooktime() %> <%= pVO.getP_main_img() %> <%= pVO.getP_price() %> <%= pVO.getS_key() %>
+	<%= pVO.getP_name() %> <%= pVO.getP_amount() %> <%= pVO.getP_cooktime() %> <%= pVO.getP_main_img() %> <%= pVO.getP_price() %> <%= pVO.getS_type() %>
 	<br/>
 	<br/>
 	---------------------------------------------------------------------
@@ -101,6 +105,36 @@ String id = mDAO.selectFindId(fiVO);
 	for (AdminReviewVO aVO : list3) {%>
 	
 	<%= aVO.getM_name() %>
+	<% } %>
+	
+	<br/>
+	<br/>
+	-------------------------------------------------<br/>
+	<%
+	
+	AdminMemberDAO amDAO = AdminMemberDAO.getInstance();
+	
+	List<AdminMemberVO> adminMemberList = amDAO.selectAdminMember(2, "정");
+			
+	for (int i = 0; i < adminMemberList.size(); i++) {%>
+	
+	<%= adminMemberList.get(i).getM_id() %>
+	
+	<% } %>
+	<br/>
+	<br/>
+	-------------------------------------------------<br/>
+	<%
+	
+		AdminProductDAO apDAO = AdminProductDAO.getInstance();
+	
+		List<MainManagerVO> mmList = apDAO.selectMainPage(2, "2");
+		
+		for (MainManagerVO vo : mmList) {
+	%>
+	
+		<%= vo.getP_name() %>
+	
 	<% } %>
 
 </div>

@@ -48,19 +48,29 @@ public static AdminMemberDAO getInstance() {
 			
 			StringBuilder sb = new StringBuilder();
 			sb.append("select m_id, m_name , m_date ")
-			.append("  from  member ")
-			.append("  where m_id =? ");
+			.append("  from  member ");
+			
+			if (option == 1) {
+				sb.append(" where m_id like '%' || ? || '%' ");
+			} else if (option == 2) {
+				sb.append(" where m_name like '%' || ? || '%' ");
+			}
+			
 			pstmt = con.prepareStatement(sb.toString());
 			
-			pstmt.setString(1, optionText);
+			if (option == 1 || option == 2) {
+				pstmt.setString(1, optionText);
+			}
 			
 			rs = pstmt.executeQuery();
 			
 			AdminMemberVO amVO = null;
 			
 			while (rs.next()) {
-			amVO = new AdminMemberVO(rs.getString(1), rs.getString(2), rs.getString(3));
-				list.add(amVO);
+				if (rs.getString(2) != null) {
+					amVO = new AdminMemberVO(rs.getString(1), rs.getString(2), rs.getString(3));
+					list.add(amVO);
+				}
 			}//end while
 		}finally {
 			dc.dbClose(con, pstmt, rs);

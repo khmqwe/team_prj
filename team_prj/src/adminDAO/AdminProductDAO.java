@@ -47,13 +47,21 @@ public static AdminProductDAO getInstance() {
 			con = dc.getCon();
 			
 			StringBuilder sb = new StringBuilder();
-			sb.append("select p_thumb_img, p_name, p_num ")
-			.append("  from  producting pi, product p")
-			.append(" where (pi.p_num = p.p_num) = ? ");
+			sb.append("select p_thumb_img, p_name, p.p_num ")
+			.append("  from  product_img pi, product p")
+			.append(" where (pi.p_num = p.p_num) ");
 			
+			if (option == 1) {
+				sb.append(" and p.p_name like '%' || ? || '%' ");
+			} else if (option == 2) {
+				sb.append(" and p.p_num=? ");
+				
+			}
 			pstmt = con.prepareStatement(sb.toString());
 			
-			pstmt.setString(1, optionText);
+			if (option == 1 || option == 2) {
+				pstmt.setString(1, optionText);
+			}
 			
 			rs = pstmt.executeQuery();
 			
