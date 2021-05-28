@@ -6,6 +6,8 @@
 <%@page import="kr.co.sist.util.cipher.DataEncrypt"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
+<%@ include file="../common/jsp/common_login.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,31 +28,6 @@
  <style type="text/css">
  
  </style>
- 
-<%
-	request.setCharacterEncoding("UTF-8");
-	String id = request.getParameter("id");
-	String pass = request.getParameter("pass");
-	pass = DataEncrypt.messageDigest("MD5", pass);
-	
-	MemberDAO mDAO = MemberDAO.getInstance();
-	
-	LoginVO lVO = new LoginVO(id, pass);
-	String name = mDAO.selectLogin(lVO);
-	if (name == null) { %>
-	
-		<script>alert("아이디나 비밀번호를 확인해주세요.");
-		location.href = "http://localhost/team_prj/jspFiles/07_login.jsp";
-		</script>		
-		
-		<% 
-		return;
-	}
-	
-	session.setAttribute("id", lVO.getId());//세션에 값을 설정.
-	session.setAttribute("name", name);
-	
-%>  
 
 <!-- 메인페이지 메뉴 뿌리는 부분 -->
 <%

@@ -1,3 +1,6 @@
+<%@page import="userDAO.MainVO"%>
+<%@page import="java.util.List"%>
+<%@page import="userDAO.UserPageDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -21,13 +24,74 @@
 
  </style>
  <script type="text/javascript">
+ 
  $(function() {
 		$("#loginBtn").click(function() {
-			$("#loginFrm").submit();
+			chkNull();
+		});
+		
+		$("#id").keydown(function(evt) {
+			if (evt.which == 13) {
+				chkNull();
+			}
+		});
+		$("#pass").keydown(function(evt) {
+			if (evt.which == 13) {
+				chkNull();
+			}
+		});
+		
+		$("#btn_0").click(function() {
+			location.href = "01_main.jsp?menu=0";
+		});
+		$("#btn_1").click(function() {
+			location.href = "01_main.jsp?menu=1";
+		});
+		$("#btn_2").click(function() {
+			location.href = "01_main.jsp?menu=2";
 		});
 	});//ready
+	
+function chkNull() {
+		if ($("#id").val() == "") {
+			alert("아이디를 입력해주세요.");
+			$("#id").focus();
+			return;
+		}
+		if ($("#pass").val() == "") {
+			alert("비밀번호를 입력해주세요.");
+			$("#pass").focus();
+			return;
+		}
+		$("#loginFrm").submit();
+	}
  </script>
 </head>
+
+<!-- 메인페이지 메뉴 뿌리는 부분 -->
+<%
+	int menu = 0;
+	if (request.getParameter("menu") != null) {
+		menu = Integer.parseInt(request.getParameter("menu"));
+	}
+	UserPageDAO upDAO = UserPageDAO.getInstance();
+	List<MainVO> mainList = upDAO.selectMainList(menu);
+	String a = request.getParameter("menu");
+	
+	int pagenation = mainList.size() / 6;
+	if ((mainList.size() / 6) != 0 && (mainList.size() % 6) != 0) {
+		pagenation += 1;
+	}
+	int selectedPage = 1;
+	if (request.getParameter("val") != null) {
+		selectedPage = Integer.parseInt(request.getParameter("val"));
+	}
+	
+	int listLen = 6;
+	if (pagenation == selectedPage) {
+		listLen = mainList.size() - ((selectedPage-1) * 6);
+	}
+%>
 <body>
 <%@ include file="../common/template/header.jsp" %>
 <div>
@@ -69,20 +133,19 @@
 	<div id="leftSide">
 	
 <div class="btn-group btn-csc" role="group" aria-label="분류">
-  <button type="button" class="btn btn-default">한식</button>
-  <button type="button" class="btn btn-default">중식</button>
-  <button type="button" class="btn btn-default">전체</button>
+  <button type="button" class="btn btn-default" value="1" id="btn_1" name="btn_1">한식</button>
+  <button type="button" class="btn btn-default" value="2" id="btn_2" name="btn_2">중식</button>
+  <button type="button" class="btn btn-default" value="3" id="btn_0" name="btn_0">전체</button>
 </div>
 
 	<div class="row"> <!-- 섬네일 --> 
-	<%for(int i=0;i<6;i++){%>
+	<% for (int i=(selectedPage-1)*6; i< (selectedPage-1)*6 + listLen; i++){ %>
   <div class="col-xs-6 col-md-4"> 
   <div class="pList">
     <a href="#" class="thumbnail">
-	<img src="http://localhost/project_2/common/images/p_1.png" class="img-rounded">
+	<img src="http://localhost/team_prj/common/images/food/<%= mainList.get(i).getP_thumb_img() %>" class="img-rounded">
     </a>
-	<h4><strong>고기만두</strong></h4>
-	<span>7,800원</span>
+	<h4><strong><%= mainList.get(i).getP_name() %></strong></h4>
   </div>
   </div>	
 	<%}//end for %>
@@ -91,26 +154,13 @@
 	<div id="page">
 	<nav>
   <ul class="pagination">
-    <li>
-      <a href="#" aria-label="Previous">
-        <span aria-hidden="true">&laquo;</span>
-      </a>
-    </li>
-    <li><a href="#">1</a></li>
-    <li><a href="#">2</a></li>
-    <li><a href="#">3</a></li>
-    <li><a href="#">4</a></li>
-    <li><a href="#">5</a></li>
-    <li>
-      <a href="#" aria-label="Next">
-        <span aria-hidden="true">&raquo;</span>
-      </a>
-    </li>
+  	<% for (int i = 0; i < pagenation; i++) { %>
+  	<li><a href="01_main.jsp?val=<%= i+1 %>&menu=<%= menu %>"><%= i+1 %></a></li>
+  	<% } %>
   </ul>
 </nav>
 </div>
 	<!-- 페이지네이션 끝 -->
-	
 	</div>
 
 	<div id="rightSide">
@@ -121,7 +171,7 @@
 		 <label class="sr-only" for="id">input id</label>
 			<div class="input-group input-fix">
 		    <div class="input-group-addon input-form"> 아이디 </div>
-		    <input type="text" class="form-control" id="id" placeholder="아이디 입력" >
+		    <input type="text" class="form-control" id="id" name="id" placeholder="아이디 입력" >
 		    </div>
 		</div>
 		<!-- pass입력폼 -->
@@ -129,7 +179,7 @@
 			 <label class="sr-only" for="id">input pass</label>
 			<div class="input-group">
 		      <div class="input-group-addon">비밀번호</div>
-		      <input type="password" class="form-control" id="pass" placeholder="비밀번호 입력" >
+		      <input type="password" class="form-control" id="pass" name="pass" placeholder="비밀번호 입력" >
 		      </div>
 			</div>
 				<!-- 회원가입/비밀번호 찾기 -->

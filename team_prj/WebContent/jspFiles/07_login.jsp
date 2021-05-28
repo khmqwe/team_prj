@@ -1,3 +1,6 @@
+<%@page import="userDAO.LoginVO"%>
+<%@page import="userDAO.MemberDAO"%>
+<%@page import="kr.co.sist.util.cipher.DataEncrypt"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -19,16 +22,42 @@
  <style type="text/css">
 
  </style>
+ 
+ 
  <script type="text/javascript">
 
  
  $(function() {
 	 $("#login").click(function() {
-		$("#loginFrm").submit();
+		 chkNull();
  	 });
-	 
+		
+	$("#id").keydown(function(evt) {
+		if (evt.which == 13) {
+			chkNull();
+		}
+	});
+	$("#pass").keydown(function(evt) {
+		if (evt.which == 13) {
+			chkNull();
+		}
+	});
 	 
  });
+ 
+ function chkNull() {
+		if ($("#id").val() == "") {
+			alert("아이디를 입력해주세요.");
+			$("#id").focus();
+			return;
+		}
+		if ($("#pass").val() == "") {
+			alert("비밀번호를 입력해주세요.");
+			$("#pass").focus();
+			return;
+		}
+		$("#loginFrm").submit();
+	}
  </script>
 </head>
 <body>
@@ -43,13 +72,13 @@
  			 <label>아이디</label>
  			 </div>
  			<div>
-  			<input type="text" class="pass-text" placeholder="아이디를 입력하세요.">
+  			<input type="text" class="pass-text" id="id" name="id" placeholder="아이디를 입력하세요.">
 			</div>
 			<div class="pass-label">
   			<label>비밀번호</label>
   			</div>
   			<div>
-  			<input type="password" class="pass-text" placeholder="비밀번호를 입력하세요." >
+  			<input type="password" class="pass-text" id="pass" name="pass" placeholder="비밀번호를 입력하세요." >
   			</div>
 			<div> <br>	
 			<input type="button" id="login" value="로그인" class="btn btn-success btn-lg" style="width:477px; height:70px;font-weight: bold;"/>
