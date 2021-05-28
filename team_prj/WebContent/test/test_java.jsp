@@ -1,11 +1,12 @@
+<%@page import="adminDAO.ReviewVO"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
 <%@page import="adminDAO.AdminReviewVO"%>
 <%@page import="adminDAO.AdminReviewDAO"%>
 <%@page import="adminDAO.LoginVO"%>
 <%@page import="adminDAO.AdminLoginDAO"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -33,12 +34,18 @@
 <body>
 <div>
 <%
-request.setCharacterEncoding("UTF-8");
-AdminReviewDAO aDAO = AdminReviewDAO.getInstance();
-List<AdminReviewVO> arVO = aDAO.selectAdminReview(1, "맛");
-
-out.print(arVO);
+   AdminReviewDAO arDAO = AdminReviewDAO.getInstance();
+	ReviewVO rVO = arDAO.selectAdminReview(23); 
 %>
+    
+   <%=rVO.getM_id() %>,
+   <%= rVO.getM_name() %>,
+	<%=rVO.getP_name() %>,
+	<%=rVO.getR_score() %>,
+	<%=  rVO.getR_date() %>,
+	<%= rVO.getR_title() %>,
+	<%= rVO.getR_content() %>
+
 </div>
 </body>
 </html>
