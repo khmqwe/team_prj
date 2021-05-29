@@ -1,3 +1,5 @@
+<%@page import="adminDAO.ReviewVO"%>
+<%@page import="adminDAO.AdminReviewDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -56,7 +58,14 @@ $(function() {
 		</div>
 		<div class = "logout"><button type="button" class="btn btn-default" style = " width : 120px; height : 40px; font-weight: bold;">관리자로그아웃</button></div>
 	</div>
-	
+	<%
+	String num=request.getParameter("o_num");
+	int intNum=Integer.parseInt(num);
+	request.setCharacterEncoding("UTF-8");
+	AdminReviewDAO arDAO=AdminReviewDAO.getInstance();
+	ReviewVO arVO=new ReviewVO();
+	arVO=arDAO.selectAdminReviewPage(intNum);
+	%>
 	<div class = "right_bar">
 		<div><h1 style= "font-weight: bold;">리뷰관리</h1></div>
 		<form action="" method="post" id="reFrm" > 
@@ -65,28 +74,28 @@ $(function() {
 			<table border = "1" cellspacing = "0" bordercolor = "#B4B4B4"  style = "width : 800px ; height : 600px ;margin: auto ">
 				<tr>
 					<td  class = "title_btn">작성자이름</td>
-					<td ><input type = "text" id="name" name="name"  placeholder = "이름"  style = "width : 200px; height : 30px;" readonly> </td>
+					<td><%=arVO.getM_name()%></td>
 					<td  class = "title_btn">작성자아이디</td>
-					<td ><input type = "text" id="id" name="id" placeholder = "아이디" style = "width : 200px; height : 30px;" readonly> </td>
+					<td ><%=arVO.getM_id()%></td>
 				</tr>
 				<tr>
 					<td class = "title_btn">평점</td>
-					<td>★ </td>
+					<td><%=arVO.getR_score()%></td>
 					<td class = "title_btn"> 작성일 </td>
-					<td>2021-05-15</td>
+					<td><%=arVO.getR_date()%></td>
 				</tr>
 				
 				<tr>
 					<td class = "title_btn" >구매상품</td>
-					<td colspan = "3"><input type = "text" id="p_name" name="p_name" placeholder = "구매상품이름" style = "width : 600px ; height : 30px" readonly></td>
+					<td colspan = "3"><%=arVO.getP_name() %></td>
 				</tr>
 				<tr>
 					<td class = "title_btn" >리뷰제목</td>
-					<td colspan = "3"><input type = "text" id="re_title" name="re_title" placeholder = "리뷰제목" style = "width : 600px ; height : 30px" readonly></td>
+					<td colspan = "3"><%=arVO.getR_title() %></td>
 				</tr>
 				<tr>
 					<td class = "title_btn" >리뷰내용</td>
-					<td colspan = "3"><input type = "text" id="re_text" name="re_text" placeholder = "리뷰내용" style = "width : 600px ; height : 300px" readonly></td>
+					<td colspan = "3"><%=arVO.getR_content() %></td>
 				</tr>
 				
 				</table>

@@ -70,7 +70,8 @@ public class AdminReviewDAO {
 	         AdminReviewVO arVO = null; 
 	         
 	         while(rs.next()) {
-	            arVO = new AdminReviewVO(rs.getString(1), rs.getString(2), rs.getString(3),rs.getInt(4));
+	            arVO = new AdminReviewVO(rs.getString("m_id"), rs.getString("m_name"), 
+	            		rs.getString("r_title"),rs.getInt("o_num"));
 
 	            list.add(arVO);
 	         }
@@ -122,10 +123,10 @@ public class AdminReviewDAO {
 	      return chk;
 	}//deleteAdminReview
 	
-	public ReviewVO selectAdminReview(int o_num) throws SQLException{
+	public ReviewVO selectAdminReviewPage(int o_num) throws SQLException{
 		ReviewVO rVO = null;
 		
-		 DbConnection dc = DbConnection.getInstance();
+		  DbConnection dc = DbConnection.getInstance();
 	      PreparedStatement pstmt = null;
 	      ResultSet rs = null;
 	      Connection con = null;
@@ -135,14 +136,15 @@ public class AdminReviewDAO {
 				con = dc.getCon(); 
 			//2. 쿼리문 생성객체 얻기 
 				StringBuilder sb = new StringBuilder();
-				sb.append("select m.m_id, m.m_name, p.p_name, r.r_score, r.r_date, r.r_title,r.r_content  ")
-				.append("from  member m ,  product p , review r, product_img pi, ordering o  ")
-				.append("where (o.p_num = p.p_num) and (pi.p_num = p.p_num) and o.o_num = ?  "); 
+				sb.append("select  m.m_id,m. m_name,p.p_name,r.r_score, r.r_date, r.r_title, r.r_content ")
+				.append("from REVIEW r,ORDERING o,member m,product p ")
+				.append("where r.o_num=o.o_num and o.m_id=m.m_id and o.p_num=p.p_num " )
+				.append("and o.o_num=?");
 				
 				pstmt = con.prepareStatement(sb.toString());
 				
 				//3. 바인드변수에 값 할당
-				pstmt.setInt(1, o_num);
+				pstmt.setInt(1,o_num);
 				
 				
 				//4. 쿼리문 수행 후 결과 얻기 
@@ -150,8 +152,9 @@ public class AdminReviewDAO {
 				
 				
 				if (rs.next()) {
-					rVO = new ReviewVO(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5)
-							,rs.getString(6),rs.getString(7));
+					rVO = new ReviewVO(rs.getString("m_id"),rs.getString("m_name"),rs.getString("p_name"),
+									rs.getString("r_score"),rs.getString("r_date"),
+									rs.getString("r_title"),rs.getString("r_content"));
 				}//end if 
 	      } finally {
 	         dc.dbClose(con, pstmt, rs);

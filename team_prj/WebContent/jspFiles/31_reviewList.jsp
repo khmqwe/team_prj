@@ -1,3 +1,7 @@
+<%@page import="adminDAO.AdminReviewVO"%>
+<%@page import="java.util.List"%>
+<%@page import="adminDAO.ReviewVO"%>
+<%@page import="adminDAO.AdminReviewDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -34,6 +38,12 @@ $(function() {
 </script>
 </head>
 <body>
+<%
+AdminReviewDAO arDAO=AdminReviewDAO.getInstance();
+List<AdminReviewVO> adList= arDAO.selectAdminReview(3, "");
+ReviewVO rVO=new ReviewVO();
+%>
+
 <div class = "container">
 
 	<div class = "left_bar">
@@ -84,55 +94,18 @@ $(function() {
 				<td width = 200px;>리뷰제목</td>
 				<td width = 80px;>관리</td>
 			</tr>
+			
+			<%for(int i=0;i<8;i++){ %>
 			<tr>
-				<td>7</td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td><input type = "button" value = "수정" class = "btn btn-primary" ></td>
+				<td><%=i%></td>
+				<td><%=adList.get(i).getM_id() %></td>
+				<td><%=adList.get(i).getM_name() %></td>
+				<td><%=adList.get(i).getR_title() %></td>
+				<td><a href="http://localhost/project_2/jspFiles/32_reviewRevise.jsp?o_num=<%=adList.get(i).getO_num()%>">
+				<input type = "button" value = "수정" class = "btn btn-primary" >
+				</a></td>
 			</tr>
-			<tr>
-				<td>6</td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td><input type = "button" value = "수정" class = "btn btn-primary" ></td>
-			</tr>
-			<tr>
-				<td>5</td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td><input type = "button" value = "수정" class = "btn btn-primary" ></td>
-			</tr>
-			<tr>
-				<td>4</td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td><input type = "button" value = "수정" class = "btn btn-primary"></td>
-			</tr>
-			<tr>
-				<td>3</td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td><input type = "button" value = "수정" class = "btn btn-primary" ></td>
-			</tr>
-			<tr>
-				<td>2</td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td><input type = "button" value = "수정" class = "btn btn-primary"></td>
-			</tr>
-			<tr>
-				<td>1</td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td><input type = "button" value = "수정" class = "btn btn-primary" ></td>
-			</tr>
+			<%}%>
 		</table>
 	</div>
 		<nav>
