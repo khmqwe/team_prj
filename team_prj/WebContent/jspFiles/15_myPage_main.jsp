@@ -49,7 +49,7 @@ $(document).ready(function() {
 		<form action="17_myPage_purchse_list.jsp" id="frm1" name="frm1">
 		<input class="btn btn-default btn-size" id="btn1" type="button" value="구매목록"/>
 		</form>
-		<form action="16_myPage_review_list.jsp" id="frm2" name="frm2">
+		<form action="16_myPage_review_list.jsp?page=1" id="frm2" name="frm2">
 		<input class="btn btn-default btn-size" id="btn2" type="button" value="내가 쓴 리뷰"/>
 		</form>
 		<form action="19_myPage_pass_check.jsp" id="frm3" name="frm3">

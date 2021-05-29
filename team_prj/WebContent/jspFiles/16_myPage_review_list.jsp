@@ -32,6 +32,9 @@
 	List<MyReviewVO> mrList = rDAO.selectMyReviewList(id);
 	
 	int pageCnt = mrList.size() / 4;
+	if (pageCnt < 1) {
+		pageCnt = 1;
+	}
 	if ((mrList.size() / 4) != 0 && (mrList.size() % 4) != 0) {
 		pageCnt += 1;
 	}

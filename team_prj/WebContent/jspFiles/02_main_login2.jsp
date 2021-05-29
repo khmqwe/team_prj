@@ -124,7 +124,7 @@
  <div class="row"> <!-- 섬네일 -->
   
   <!--  -->
-    	<% for (int i=(selectedPage-1)*6; i< (selectedPage-1)*6 + listLen; i++){ %>
+  <% for (int i=(selectedPage-1)*6; i< (selectedPage-1)*6 + listLen; i++){ %>
   <div class="col-xs-6 col-md-4"> 
 	  <div class="pList">
 	    <a href="#" class="thumbnail">
@@ -133,7 +133,7 @@
 		<h4><strong><%= mainList.get(i).getP_name() %></strong></h4>
 	  </div>
   </div>	
-	<%}//end for %>
+  <%}//end for %>
 
 </div> 	<!-- 섬네일 끝 -->
 	<!-- 페이지네이션 -->

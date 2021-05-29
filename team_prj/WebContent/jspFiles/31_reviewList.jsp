@@ -101,7 +101,7 @@ ReviewVO rVO=new ReviewVO();
 				<td><%=adList.get(i).getM_id() %></td>
 				<td><%=adList.get(i).getM_name() %></td>
 				<td><%=adList.get(i).getR_title() %></td>
-				<td><a href="http://localhost/project_2/jspFiles/32_reviewRevise.jsp?o_num=<%=adList.get(i).getO_num()%>">
+				<td><a href="http://localhost/team_prj/jspFiles/32_reviewRevise.jsp?o_num=<%=adList.get(i).getO_num()%>">
 				<input type = "button" value = "수정" class = "btn btn-primary" >
 				</a></td>
 			</tr>
