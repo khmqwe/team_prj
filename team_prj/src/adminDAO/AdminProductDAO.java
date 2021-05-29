@@ -107,7 +107,7 @@ public static AdminProductDAO getInstance() {
 			
 			if (rs.next()) {
 				//조회된 컬럼값을 VO에 할당
-				ipVO = new InfoProductVO(rs.getString("p_num"), rs.getString("p_name"), rs.getString("p_price"),
+				ipVO = new InfoProductVO(rs.getString("p_num"), rs.getString("p_name"),rs.getString("p_img_num"), rs.getString("p_price"),
 						rs.getString("t_type"), rs.getString("p_cooktime"), rs.getString("p_amount") ,rs.getString("s_type"),
 						rs.getString("p_thumb_img"), rs.getString("p_main_img"), rs.getString("p_detailes_img"),rs.getString("p_explain"));
 				
@@ -158,14 +158,16 @@ public static AdminProductDAO getInstance() {
 			pstmt.executeUpdate();
 			dc.dbClose(con, pstmt, rs);
 			
-			query = "insert into Product_img( p_thumb_img, p_main_img, p_details_img)"
-					+ "values(?,?,?)";
+			query = "insert into Product_img( p_num, p_img_num, p_thumb_img, p_main_img, p_details_img)"
+					+ "values(?,?,?,?,?)";
 			
 			pstmt = con.prepareStatement(query);
 			
-			pstmt.setString(1, iVO.getP_thumb_img());
-			pstmt.setString(2, iVO.getP_main_img());
-			pstmt.setString(3, iVO.getP_details_img());
+			pstmt.setString(1, iVO.getP_num());
+			pstmt.setString(2, iVO.getP_img_num());
+			pstmt.setString(3, iVO.getP_thumb_img());
+			pstmt.setString(4, iVO.getP_main_img());
+			pstmt.setString(5, iVO.getP_details_img());
 	
 			pstmt.executeUpdate();
 			

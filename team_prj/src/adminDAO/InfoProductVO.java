@@ -1,7 +1,7 @@
 package adminDAO;
 
 public class InfoProductVO {
-	private String p_num,p_name,p_price,t_type,p_cooktime,p_amount,s_type,p_thumb_img,p_main_img,p_details_img,p_explain;
+	private String p_num,p_img_num,p_name,p_price,t_type,p_cooktime,p_amount,s_type,p_thumb_img,p_main_img,p_details_img,p_explain;
 	
 	
 	public InfoProductVO() {
@@ -9,19 +9,21 @@ public class InfoProductVO {
 	}
 
 
-	public InfoProductVO(String p_num, String p_name, String p_price, String t_type, String p_cooktime, String p_amount,
-			String s_type, String p_thumb_img, String p_main_img, String p_details_img, String p_explain) {
-		this.p_num = p_num;
-		this.p_name = p_name;
-		this.p_price = p_price;
-		this.t_type = t_type;
-		this.p_cooktime = p_cooktime;
-		this.p_amount = p_amount;
-		this.s_type = s_type;
-		this.p_thumb_img = p_thumb_img;
-		this.p_main_img = p_main_img;
-		this.p_details_img = p_details_img;
-		this.p_explain = p_explain;
+	public InfoProductVO(String p_num, String p_img_num, String p_name, String p_price, String t_type,
+			String p_cooktime, String p_amount, String s_type, String p_thumb_img, String p_main_img,
+			String p_details_img, String p_explain) {
+			this.p_num = p_num;
+			this.p_img_num = p_img_num;
+			this.p_name = p_name;
+			this.p_price = p_price;
+			this.t_type = t_type;
+			this.p_cooktime = p_cooktime;
+			this.p_amount = p_amount;
+			this.s_type = s_type;
+			this.p_thumb_img = p_thumb_img;
+			this.p_main_img = p_main_img;
+			this.p_details_img = p_details_img;
+			this.p_explain = p_explain;
 	}
 
 
@@ -32,6 +34,16 @@ public class InfoProductVO {
 
 	public void setP_num(String p_num) {
 		this.p_num = p_num;
+	}
+
+
+	public String getP_img_num() {
+		return p_img_num;
+	}
+
+
+	public void setP_img_num(String p_img_num) {
+		this.p_img_num = p_img_num;
 	}
 
 
@@ -134,7 +146,5 @@ public class InfoProductVO {
 		this.p_explain = p_explain;
 	}
 
-	
-
-	
+		
 }
