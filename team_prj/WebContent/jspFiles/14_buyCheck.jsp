@@ -22,7 +22,11 @@
 
  </style>
  <script type="text/javascript">
- 
+ $(function() {
+		$("#buy").click(function() {
+			location.href ='01_main.jsp';
+		});	
+ });
  </script>
 </head>
 <body>
@@ -33,7 +37,7 @@
 <div class="submitPage">
 <h2> <strong>구매가 완료되었습니다.</strong> </h2> <br>
  <br>
-		<input type="button" value="확인" class="btn btn-success "/>
+		<input type="button" value="확인" class="btn btn-success " id="buy" name="buy"/>
 		<br>
 		</div>
 </div>

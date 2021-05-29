@@ -96,9 +96,9 @@ public static AdminProductDAO getInstance() {
 			
 			con = ds.getConnection();
 			
-			String selectVO = "select p_num, p_name, p_price, t_type, p_cooktime, p_amount, s_type, p_thumb_img, p_main_img, p_detailes_img, p_explain "
-					+ " from product "
-					+ " where p_num = ? ";
+			String selectVO = "select p.p_num, p_name, p_price, p.t_type, p_cooktime, p_amount, s_type, p_thumb_img, p_main_img, p_details_img, p_explain "
+					+ " from product p, product_img pi, type t "
+					+ " where p.P_NUM = pi.P_NUM AND t.T_TYPE = p.T_TYPE AND p_num = ? ";
 			pstmt = con.prepareStatement(selectVO);
 			//4.바인드변수에 값 할당
 			pstmt.setString(1, id);
@@ -134,10 +134,16 @@ public static AdminProductDAO getInstance() {
 		try {
 			con = dc.getCon();
 			
-			String query = "insert into InfoProduct(p_num, p_name, p_price, t_type, p_cooktime"
-					+ " p_amount, s_type, p_thumb_img, p_main_img, p_detailes_img, p_explain) "
-					+ "values(?,?,?,?,?,?,?,?,?,?,?)";
-			
+			/*
+			 * String query =
+			 * "insert into Product(p_num, p_name, p_price, t_type, p_cooktime," +
+			 * " p_amount, s_type, p_thumb_img, p_main_img, p_details_img, p_explain) " +
+			 * "values(?,?,?,?,?,?,?,?,?,?,?)";
+			 */
+			String query =
+			"insert into Product(p_num, p_name, p_price, t_type, p_cooktime," +
+		    " p_amount, s_type, p_explain) " +
+		    "values(?,?,?,?,?,?,?,?)";
 			pstmt = con.prepareStatement(query);
 			
 			pstmt.setString(1, iVO.getP_num());
@@ -147,11 +153,20 @@ public static AdminProductDAO getInstance() {
 			pstmt.setString(5, iVO.getP_cooktime());
 			pstmt.setString(6, iVO.getP_amount());
 			pstmt.setString(7, iVO.getS_type());
-			pstmt.setString(8, iVO.getP_thumb_img());
-			pstmt.setString(9, iVO.getP_main_img());
-			pstmt.setString(10, iVO.getP_detailes_img());
-			pstmt.setString(11, iVO.getP_explain());
+			pstmt.setString(8, iVO.getP_explain());
 			
+			pstmt.executeUpdate();
+			dc.dbClose(con, pstmt, rs);
+			
+			query = "insert into Product_img( p_thumb_img, p_main_img, p_details_img)"
+					+ "values(?,?,?)";
+			
+			pstmt = con.prepareStatement(query);
+			
+			pstmt.setString(1, iVO.getP_thumb_img());
+			pstmt.setString(2, iVO.getP_main_img());
+			pstmt.setString(3, iVO.getP_details_img());
+	
 			pstmt.executeUpdate();
 			
 		} finally {
@@ -173,25 +188,33 @@ public static AdminProductDAO getInstance() {
 			StringBuilder sb = new StringBuilder();
 			
 			sb.append(" update product ")
-			.append(" set p_name = ?, p_price = ?, t_type = ?, p_cooktime = ?, p_amount = ?, s_type = ?, p_thumb_img = ?, p_main_img = ?, p_detailes_img = ?, p_explain = ? ")
+			.append(" set p_name = ?, p_price = ?, t_type = ?, p_cooktime = ?, p_amount = ?, s_type = ?, p_explain = ? ")
 			.append(" where p_num = ? ");
 			
 			pstmt = con.prepareStatement(sb.toString());
 			
-			pstmt.setString(1, iVO.getP_num());
-			pstmt.setString(2, iVO.getP_name());
-			pstmt.setString(3, iVO.getP_price());
-			pstmt.setString(4, iVO.getT_type());
-			pstmt.setString(5, iVO.getP_cooktime());
-			pstmt.setString(6, iVO.getP_amount());
-			pstmt.setString(7, iVO.getS_type());
-			pstmt.setString(8, iVO.getP_thumb_img());
-			pstmt.setString(9, iVO.getP_main_img());
-			pstmt.setString(10, iVO.getP_detailes_img());
-			pstmt.setString(11, iVO.getP_explain());
+			pstmt.setString(1, iVO.getP_name());
+			pstmt.setString(2, iVO.getP_price());
+			pstmt.setString(3, iVO.getT_type());
+			pstmt.setString(4, iVO.getP_cooktime());
+			pstmt.setString(5, iVO.getP_amount());
+			pstmt.setString(6, iVO.getS_type());
+			pstmt.setString(7, iVO.getP_explain());
+			pstmt.setString(8, iVO.getP_num());
 			
 			result = pstmt.executeUpdate();
+			dc.dbClose(con, pstmt, rs);
 			
+			sb.append(" update product_img ")
+			.append(" set p_thumb_img = ?, p_main_img = ?, p_details_img = ? ")
+			.append(" where p_num = ? ");
+			
+			pstmt = con.prepareStatement(sb.toString());
+			
+			pstmt.setString(1, iVO.getP_thumb_img());
+			pstmt.setString(2, iVO.getP_main_img());
+			pstmt.setString(3, iVO.getP_details_img());
+			pstmt.setString(4, iVO.getP_num());
 		} finally {
 			dc.dbClose(con, pstmt, rs);
 		}
@@ -212,9 +235,9 @@ public static AdminProductDAO getInstance() {
 			
 			StringBuilder sb = new StringBuilder();
 			
-			sb.append(" update member ")
-			.append(" set m_name = ?, m_pass = ?, m_email = ?, m_telnum = ?, m_zipcode = ?, m_address = ?, m_add_address = ?, m_date = ?, m_memo = ? ")
-			.append(" where m_id = ? ");
+			sb.append(" update product ")
+			.append(" set  p_name = ?, p_price = ?, t_type = ?, p_cooktime = ?, p_amount = ?, s_type = ?, p_explain = ? ")
+			.append(" where p_num = ? ");
 			
 			pstmt = con.prepareStatement(sb.toString());
 			
@@ -225,12 +248,24 @@ public static AdminProductDAO getInstance() {
 			pstmt.setNull(5, Types.VARCHAR);
 			pstmt.setNull(6, Types.VARCHAR);
 			pstmt.setNull(7, Types.VARCHAR);
-			pstmt.setNull(8, Types.VARCHAR);
-			pstmt.setNull(9, Types.VARCHAR);
-			pstmt.setString(10, p_num);
+			pstmt.setString(8, p_num);
 			
 			result = pstmt.executeUpdate();
+			dc.dbClose(con, pstmt, rs);
+			
+			sb.append(" update product_img ")
+			.append(" set  p_thumb_img = ?, p_main_img = ?, p_details_img =? ")
+			.append(" where p_num = ? ");
+			
+			pstmt = con.prepareStatement(sb.toString());
+			
+			pstmt.setNull(1, Types.VARCHAR);
+			pstmt.setNull(2, Types.VARCHAR);
+			pstmt.setNull(3, Types.VARCHAR);
+			pstmt.setString(4, p_num);
+			
 		} finally {
+			
 			dc.dbClose(con, pstmt, rs);
 		}//end finally
 		

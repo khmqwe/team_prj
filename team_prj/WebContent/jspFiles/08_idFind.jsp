@@ -1,3 +1,5 @@
+<%@page import="userDAO.FindIdVO"%>
+<%@page import="userDAO.MemberDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -21,11 +23,35 @@
 
  </style>
  <script type="text/javascript">
- $(function() {
-		$("#find").click(function() {
-			$("#findFrm").submit();
-		});
-	});//ready
+	$(function(){
+		$("#name").keydown(function(evt){ 
+			if(evt.which == 13){
+				chkNull();
+			}//end if
+		});	
+		$("#tel1").keydown(function(evt){ 
+			if(evt.which == 13){
+				chkNull();
+			}//end if
+		});	
+		$("#find").click(function(){ 
+			chkNull();
+		});	
+		
+	});
+function chkNull() {
+		if ($("#name").val() == "") {
+			alert("이름을 입력해주세요.");
+			$("#name").focus();
+			return;
+		}
+		if ($("#tel1").val() == "") {
+			alert("휴대폰번호를 입력해주세요.");
+			$("#tel1").focus();
+			return;
+		}
+		$("#findFrm").submit();
+	} 
  </script>
 </head>
 <body>
@@ -54,9 +80,9 @@
 			</div>
 			<div class="idfind-telnum">
 			<label>휴대폰 번호</label>
-			<input type="text" class="tel-text" name="tel1" id="tel1"/> -
-			<input type="text" class="tel-text" name="tel2" id="tel2"/> -
-			<input type="text" class="tel-text" name="tel3" id="tel3"/>
+			<input type="text" class="tel-text"  maxlength="3" name="tel1" id="tel1"/> -
+			<input type="text" class="tel-text"  maxlength="4" name="tel2" id="tel2"/> -
+			<input type="text" class="tel-text"  maxlength="4" name="tel3" id="tel3"/>
 			</div>
 			
 			<br>

@@ -1,3 +1,5 @@
+<%@page import="userDAO.FindPassVO"%>
+<%@page import="userDAO.MemberDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -20,12 +22,49 @@
  <style type="text/css">
 
  </style>
+ 
  <script type="text/javascript">
- $(function() {
-		$("#find").click(function() {
-			$("#findFrm").submit();
-		});
-	});//ready
+ 
+	$(function(){
+		$("#name").keydown(function(evt){ 
+			if(evt.which == 13){
+				chkNull();
+			}//end if
+		});	
+		$("#id").keydown(function(evt){ 
+			if(evt.which == 13){
+				chkNull();
+			}//end if
+		});	
+		$("#tel1").keydown(function(evt){ 
+			if(evt.which == 13){
+				chkNull();
+			}//end if
+		});	
+		$("#find").click(function(){ 
+			chkNull();
+		});	
+		
+	});
+function chkNull() {
+		if ($("#name").val() == "") {
+			alert("이름을 입력해주세요.");
+			$("#name").focus();
+			return;
+		}
+		if ($("#id").val() == "") {
+			alert("아이디를 입력해주세요.");
+			$("#id").focus();
+			return;
+		}
+		if ($("#tel1").val() == "") {
+			alert("휴대폰번호를 입력해주세요.");
+			$("#tel1").focus();
+			return;
+		}
+		$("#findFrm").submit();
+	} 	
+	
  </script>
 </head>
 <body>
@@ -48,19 +87,19 @@
 			<form action="11_passCheck.jsp" method="post" id="findFrm"> 			
 			<div class="idfind-name">
 			<label>이름</label>&nbsp;&nbsp;&nbsp;
-			<input type="text" placeholder="이름을 입력해주세요."class="name-text"/>
+			<input type="text" placeholder="이름을 입력해주세요."class="name-text" name="name" id="name"/>
 			</div>
 			<div class="idfind-name">
 			<label>아이디</label>
-			<input type="text" placeholder="아이디를 입력해주세요."class="name-text"/>
+			<input type="text" placeholder="아이디를 입력해주세요."class="name-text" name="id" id="id"/>
 			</div>
 			
 			
 			<div class="idfind-telnum">
 			<label>휴대폰 번호</label>&nbsp;&nbsp;&nbsp;
-			<input type="text" class="tel-text"/> -
-			<input type="text" class="tel-text"/> -
-			<input type="text" class="tel-text"/>
+			<input type="text" class="tel-text" maxlength="3" name="tel1" id="tel1"/> -
+			<input type="text" class="tel-text" maxlength="4" name="tel2" id="tel2"/> -
+			<input type="text" class="tel-text" maxlength="4" name="tel3" id="tel3"/>
 			</div>
 			<br>
 			<input type="button" value="확인" id="find" class="btn btn-success btn-lg" style="width:450px; height:70px;font-weight: bold;"/>

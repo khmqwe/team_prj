@@ -1,24 +1,23 @@
 package userDAO;
 
 public class ProductDetailVO {
-	private String p_detailes_img,p_explain;
+	private String p_details_img,p_explain;
 	
 	public ProductDetailVO() {
 		
 	}
 
-	public ProductDetailVO(String p_detailes_img, String p_explain) {
-		super();
-		this.p_detailes_img = p_detailes_img;
+	public ProductDetailVO(String p_details_img, String p_explain) {
+		this.p_details_img = p_details_img;
 		this.p_explain = p_explain;
 	}
 
-	public String getP_detailes_img() {
-		return p_detailes_img;
+	public String getP_details_img() {
+		return p_details_img;
 	}
 
-	public void setP_detailes_img(String p_detailes_img) {
-		this.p_detailes_img = p_detailes_img;
+	public void setP_details_img(String p_details_img) {
+		this.p_details_img = p_details_img;
 	}
 
 	public String getP_explain() {
@@ -28,5 +27,6 @@ public class ProductDetailVO {
 	public void setP_explain(String p_explain) {
 		this.p_explain = p_explain;
 	}
+	
 	
 }

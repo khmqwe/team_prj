@@ -79,7 +79,7 @@
 	<div style="text-align:center;font-size:18px;font-weight:bold; margin-top:70px;">
 	<ul class="nav nav-tabs nav-justified" >
 			<li role="presentation" class="active"><a href="#">상품상세</a></li>
-			<li role="presentation" ><a href="#" style="color:#666;">리뷰</a></li>
+			<li role="presentation" ><a href="http://localhost/team_prj/jspFiles/13_product_review.jsp" style="color:#666;">리뷰</a></li>
 	</ul>
 	</div>
 	<hr align="left" class="hr-type2">

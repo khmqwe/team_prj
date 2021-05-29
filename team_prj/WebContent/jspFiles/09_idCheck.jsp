@@ -1,3 +1,5 @@
+<%@page import="userDAO.FindIdVO"%>
+<%@page import="userDAO.MemberDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -20,6 +22,22 @@
  <style type="text/css">
 
  </style>
+  <%
+	request.setCharacterEncoding("UTF-8");
+	String m_name = request.getParameter("name");
+	String m_telnum = request.getParameter("tel1") + "-" + request.getParameter("tel2") + "-" + request.getParameter("tel3");
+	
+	MemberDAO mDAO = MemberDAO.getInstance();
+	
+	FindIdVO FVO = new FindIdVO(m_name, m_telnum);
+	String id = mDAO.selectFindId(FVO);
+	if (id == null) { %>
+	
+		<script>
+			alert("이름과 전화번호를 확인해주세요.");
+			history.back();
+		</script>
+<% } %>
  <script type="text/javascript">
  $(function() {
 	 $("#loginBtn").click(function() {
@@ -38,7 +56,7 @@
 <div class="content">
 
 <div class="submitPage">
-<h2> <strong>등록하신 아이디는 OOO 입니다.</strong> </h2> <br>
+<h2> <strong >등록하신 아이디는 <%=id%> 입니다.</strong> </h2> <br>
 로그인 후에 서비스를 이용할 수 있습니다. <br><br>
 <input type="button" id="passfind" value="비밀번호찾기" class="btn btn-success"/>&nbsp;&nbsp;&nbsp;&nbsp;
 		<input type="button" id="loginBtn" value="로그인" class="btn btn-success"/>
