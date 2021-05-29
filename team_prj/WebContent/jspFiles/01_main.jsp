@@ -91,6 +91,15 @@ function chkNull() {
 	if (pagenation == selectedPage) {
 		listLen = mainList.size() - ((selectedPage-1) * 6);
 	}
+	
+	String hidOut = request.getParameter("hidOut");
+	
+	if (hidOut != null) {
+		if (hidOut.equals("out")) {
+			session.removeAttribute("name");
+			session.removeAttribute("id");
+		}
+	}
 %>
 <body>
 <%@ include file="../common/template/header.jsp" %>

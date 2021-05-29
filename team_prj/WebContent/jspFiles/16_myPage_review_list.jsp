@@ -94,7 +94,7 @@ $(document).ready(function () {
 </head>
 <body>
 <!--header-->
-<%@ include file="../common/template/header.jsp" %>
+<%@ include file="../common/template/header2.jsp" %>
 
 <div class="mypage" id="mypage">
 	<div class="menu__left">

@@ -1,5 +1,10 @@
+<%@page import="userDAO.ModifyMemberVO"%>
+<%@page import="kr.co.sist.util.cipher.DataEncrypt"%>
+<%@page import="userDAO.LoginVO"%>
+<%@page import="userDAO.MemberDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ include file="../common/jsp/common_login.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,11 +27,35 @@
 
 </style>
 
+<%
+
+	MemberDAO mDAO = MemberDAO.getInstance();
+	
+	String pass = request.getParameter("pass");
+	pass = DataEncrypt.messageDigest("MD5", pass);
+	LoginVO lVO = new LoginVO(id, pass);
+	String nameChk = mDAO.selectLogin(lVO);
+	
+	if (!name.equals(nameChk)) { %>
+		
+		<script type="text/javascript">
+		alert("비밀번호가 일치하지 않습니다.");
+		location.href = "http://localhost/team_prj/jspFiles/19_myPage_pass_check.jsp";
+		</script>
+	<%}%>
+	
+	<%
+		ModifyMemberVO mmVO = mDAO.selectMember(id);
+	
+		String[] emailArr = mmVO.getM_email().split("@");
+		String[] telArr = mmVO.getM_telnum().split("-");
+	%>
+	
 <script type="text/javascript">
 $(function() {
 //비밀번호 변경 팝업
 	$("#pass_change").click(function() {
-		window.open("21_pop_change_pass.jsp","pass_change","width=405px,height=405px");
+		window.open("21_pop_change_pass.jsp","pass_change","width=460px,height=405px");
 	})
 //변경버튼
 	 $("#btnMod").click(function() {
@@ -65,16 +94,34 @@ $(function() {
 	                // 우편번호와 주소 정보를 해당 필드에 넣는다.
 	                document.getElementById("zipcode").value = data.zonecode;
 	                document.getElementById("addr").value = roadAddr;
+	                document.getElementById("addAddr").value = "";
 	            }
 	        }).open();
 	 });//click
+	 
+	 $("#frmSelect").change(function() {
+	 	var updateFrm = document.updateFrm;
+	 	
+	 	if (updateFrm.frmSelect.value == 'self') {
+	 		updateFrm.domain.readonly = false;
+	 		updateFrm.domain.value='';
+	 		updateFrm.domain.focus();
+	 	} else if (updateFrm.frmSelect.value == 'none') {
+	 		updateFrm.domain.readonly = true;
+	 		updateFrm.domain.value = '';
+	 	} else {
+	 		updateFrm.domain.readonly = true;
+	 		updateFrm.domain.value = updateFrm.frmSelect.value;
+	 	}
+	 	
+	 });
 });
 </script>
 
 </head>
 <body>
 <!--header-->
-<%@ include file="../common/template/header.jsp" %>
+<%@ include file="../common/template/header2.jsp" %>
 
 <div class="mypage">
 	<div class="menu__left">
@@ -95,24 +142,24 @@ $(function() {
 			
 		</div>
 		<div class="m__table">
-			<form action="22_revise_confirm.jsp" method="post" id="updateFrm" class="form-inline">
+			<form action="22_revise_confirm.jsp" method="post" name="updateFrm" id="updateFrm" class="form-inline">
 			<table style="position:absolute;">
 				<tr>
 				<td colspan="2" class="center"><font size="6"><strong>회원정보수정</strong></font></td>
 				</tr>
 				<tr class="height font-medium">
 					<td style="padding-top: 15px;">아이디</td>
-					<td style="padding-top: 15px;">아이디12345</td>
+					<td style="padding-top: 15px;"><%= id %></td>
 				</tr>
 				<tr class="height font-medium">
 					<td style="padding-top: 15px;">이름</td>
-					<td><input type="text" name="name"  /></td>
+					<td><input type="text" name="name" id="name" value="<%= mmVO.getM_name() %>"/></td>
 				</tr>
 				<tr class="height font-medium">
 					<td style="padding-top: 15px;">이메일</td>
 					<td>
-					<input type="text" name="email"   style="width: 150px;"/> @ <input type="text" name="domain"   style="width: 150px;"/>
-					<select class="select form-control">
+					<input type="text" name="email" id="email" style="width: 150px;" value="<%= emailArr[0] %>"/> @ <input type="text" name="domain" id="domain" style="width: 150px;" value="<%= emailArr[1] %>"/>
+					<select class="select form-control" id="frmSelect" name="frmSelect">
 						<option value="none">--- 선택해주세요 ---</option>
 						<option value="google.com">google.com</option>
 						<option value="naver.com">naver.com</option>
@@ -124,19 +171,21 @@ $(function() {
 				</tr>
 				<tr class="height font-medium">
 					<td style="padding-top: 15px;">휴대폰번호</td>
-					<td> <input type="text" name="tel1"   style="width: 70px;"/> - <input type="text" name="tel2"   style="width: 70px;"/> - <input type="text" name="tel3"   style="width: 70px;"/></td>
+					<td> <input type="text" name="tel1" style="width: 70px;" value="<%= telArr[0] %>"/> - 
+					<input type="text" name="tel2" style="width: 70px;" value="<%= telArr[1] %>"/> - 
+					<input type="text" name="tel3" style="width: 70px;" value="<%= telArr[2] %>"/></td>
 				</tr>
 				<tr class="height font-medium">
 					<td style="padding-top: 15px;">우편번호</td>
-					<td><input type="text" id="zipcode" name="zipcode"/>  <input type="button" value="우편번호찾기" class="btn btn-default" id="zipcodeBtn"></td>
+					<td><input type="text" id="zipcode" name="zipcode" value="<%= mmVO.getM_zipcode() %>"/>  <input type="button" value="우편번호찾기" class="btn btn-default" id="zipcodeBtn"></td>
 				</tr>
 				<tr class="height font-medium">
 					<td style="padding-top: 30px;">주소</td>
-					<td><input type="text" name="addr" id="addr" size="50"; style=" margin-bottom: 5px;"/><br/><input type="text" name="addAddr" id="addAddr" size="50""/></td>
+					<td><input type="text" name="addr" id="addr" size="50" style=" margin-bottom: 5px;" value="<%= mmVO.getM_address() %>"/><br/><input type="text" name="addAddr" id="addAddr" size="50" value="<%= mmVO.getM_add_address() %>"/></td>
 				</tr>
 				<tr class="height font-medium">
 					<td style="padding-top: 15px;">비밀번호</td>
-					<td><input type="button" value="비밀번호 변경" class="btn btn-default"/ id="pass_change"></td>
+					<td><input type="button" value="비밀번호 변경" class="btn btn-default" id="pass_change"></td>
 				</tr>
 				<tr class="height font-medium">
 					<td colspan="2" style="padding-top: 15px;">

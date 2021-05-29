@@ -1,3 +1,7 @@
+<%@page import="userDAO.PassChangeVO"%>
+<%@page import="kr.co.sist.util.cipher.DataEncrypt"%>
+<%@page import="userDAO.LoginVO"%>
+<%@page import="userDAO.MemberDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../common/jsp/common_login.jsp" %>
@@ -47,70 +51,61 @@
 #divOk {
 	text-align: center;
 	margin: auto;
-	padding-top: 20px;
+	padding-top: 120px;
 }
 
-#ok {
-	width: 150px;
-}
+#cancel
 
 </style>
 
+<%
+	String oldPass = request.getParameter("oldPass");
+	oldPass = DataEncrypt.messageDigest("MD5", oldPass);
+	String newPass = request.getParameter("newPass1");
+	newPass = DataEncrypt.messageDigest("MD5", newPass);
+	
+	MemberDAO mDAO = MemberDAO.getInstance();
+	LoginVO lVO = new LoginVO(id, oldPass);
+	String nameChk = mDAO.selectLogin(lVO);
+	
+	boolean oldPassFlag = false;
+	if (name.equals(nameChk)) {
+		oldPassFlag = true;
+	}
+	int result = 0;
+	
+	if (oldPassFlag) {
+		PassChangeVO pcVO = new PassChangeVO(id, oldPass, newPass);
+		result = mDAO.updateNewPass(pcVO);
+	}
+%>
+
 <script type="text/javascript">
 $(document).ready(function() {
+	$("#cancel").click(function() {
+		self.close();
+	});
 	
-	$("#ok").click(function() {
-		if ($("#oldPass").val() == "") {
-			alert("기존 비밀번호를 입력해주세요.");
-			$("#oldPass").focus();
-			return;
-		}
-		if ($("#newPass1").val() == "") {
-			alert("새로운 비밀번호를 입력해주세요.");
-			$("#newPass1").focus();
-			return;
-		}
-		if ($("#newPass2").val() == "") {
-			alert("비밀번호 확인을 입력해주세요.");
-			$("#newPass2").focus();
-			return;
-		}
-		
-		if ($("#newPass1").val() != $("#newPass2").val()) {
-			alert("바꾸려는 비밀번호가 일치하지 않습니다.");
-			return;
-		}
-		
-		$("#passFrm").submit();
-	});	
+	if (<%= result %> == 1) {
+		$("#chkText").html("비밀번호 변경에 성공하였습니다.");
+	} else {
+		$("#chkText").html("기존 비밀번호 입력이 틀려<br/> 변경에 실패하였습니다.");
+	}
 });
 
 </script>
 
 </head>
 <body>
-<form action="http://localhost/team_prj/jspFiles/21_pop_change_pass2.jsp" method="post" name="passFrm" id="passFrm">
+<form action="" method="post" name="passFrm" id="passFrm">
 <div id="chage_page">
 <div id="name">비밀번호 변경</div>
 <div style="width: 400px; height: 5px; background-color: #ffffff" ></div>
 <div id="passPage">
-	<table id="tab">
-		<tr>
-			<td><strong>기존 비밀번호</strong></td>
-			<td><input type="password" name="oldPass" id="oldPass"/></td>
-		</tr>
-		<tr>
-			<td><strong>새로운 비밀번호</strong></td>
-			<td><input type="password" name="newPass1" id="newPass1"/></td>
-		</tr>
-		<tr>
-			<td><strong>비밀번호 확인</strong></td>
-			<td><input type="password" name="newPass2" id="newPass2"/></td>
-		</tr>
-	</table>
+	<h3 id="chkText" style="text-align: center;"></h3>
 </div>
 <div id="divOk">
-	<input type="button" value="확인" class="btn btn-success" name="ok" id="ok"/>
+	<input type="button" value="닫기" class="btn btn-success" name="cancel" id="cancel"/>
 </div>
 </div>
 </form>

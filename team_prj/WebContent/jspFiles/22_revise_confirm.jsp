@@ -1,5 +1,8 @@
+<%@page import="userDAO.ModifyMemberVO"%>
+<%@page import="userDAO.MemberDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ include file="../common/jsp/common_login.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,7 +24,27 @@
 <style type = "text/css">
 
 </style>
+<%
+	request.setCharacterEncoding("UTF-8");
 
+	MemberDAO mDAO = MemberDAO.getInstance();
+	String m_name = request.getParameter("name");
+	session.setAttribute("name", m_name);
+	String m_email1 = request.getParameter("email");
+	String m_email2 = request.getParameter("domain");
+	String m_email = m_email1 + "@" + m_email2;
+	String m_tel1 = request.getParameter("tel1");
+	String m_tel2 = request.getParameter("tel2");
+	String m_tel3 = request.getParameter("tel3");
+	String m_tel = m_tel1 + "-" + m_tel2 + "-" + m_tel3;
+	String m_zipcode = request.getParameter("zipcode");
+	String m_addr = request.getParameter("addr");
+	String m_addAddr = request.getParameter("addAddr");
+	ModifyMemberVO mmVO = new ModifyMemberVO(id, m_name, m_email, m_tel, m_zipcode,
+			m_addr, m_addAddr);
+	int result = mDAO.updateMember(mmVO);
+
+%>
 <script type="text/javascript">
 $(function() {
 	 $("#submitBtn").click(function() {
@@ -30,10 +53,11 @@ $(function() {
 });//ready
 </script>
 <!--header-->
-<%@ include file="../common/template/header.jsp" %>
+<%@ include file="../common/template/header2.jsp" %>
+<body>
 <div class="mypage">
 
-<div class="submitPage" style="padding-top:150px">	
+	<div class="submitPage" style="padding-top:150px">	
 	
 	<h2> <strong>회원정보가 수정되었습니다.</strong> </h2> <br>
 	<br>

@@ -12,12 +12,6 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 import adminDAO.DbConnection;
-import userDAO.FindIdVO;
-import userDAO.FindPassVO;
-import userDAO.LoginVO;
-import userDAO.MemberVO;
-import userDAO.ModifyMemberVO;
-import userDAO.PassChangeVO;
 
 public class MemberDAO {
 	private static MemberDAO mDAO;

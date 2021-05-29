@@ -69,12 +69,16 @@
 		$("#btn_2").click(function() {
 			location.href = "02_main_login2.jsp?menu=2";
 		});
+		
+		$("#logout").click(function() {
+			$("#frmOut").submit();
+		});
 });
 
  </script>
 </head>
 <body>
-<%@ include file="../common/template/header.jsp" %>
+<%@ include file="../common/template/header2.jsp" %>
 <div>
 	<!-- main content영역-->
 	<div id="slide">
@@ -153,7 +157,10 @@
 				<!-- 회원가입/비밀번호 찾기 -->
 		<div style="text-align:center;">
 		<span class="memberName"> <%= name %> 님</span> 안녕하세요.
-		<div class="btnRight"><input type="button" class="btn btn-success" value="로그아웃" id="logout"></div> 
+		<form action="http://localhost/team_prj/jspFiles/01_main.jsp" method="post" name="frmOut" id="frmOut">
+		<div class="btnRight"><input type="button" class="btn btn-success" value="로그아웃" id="logout" name="logout"></div>
+		<input type="hidden" name="hidOut" id="hidOut" value="out"/>
+		</form>  
 		<br><br>
 		<input type="button" id="mypage" value="마이페이지" class="btn  btn-default btn-lg" style="width:100%; height:70px;font-weight: bold; ">
 		</div>

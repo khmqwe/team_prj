@@ -124,7 +124,7 @@ function btnClick(o_num) {
 <body>
 
 <!--header-->
-<%@ include file="../common/template/header.jsp" %>
+<%@ include file="../common/template/header2.jsp" %>
 <div class="mypage">
 	<div class="menu__left">
 		<div class="menu__left__name">
