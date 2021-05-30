@@ -117,11 +117,11 @@ function chkNull() {
   <div class="carousel-inner" role="listbox">
     <div class="item active">
     <a href="https://www.naver.com">
-      <img src="http://localhost/project_2/common/images/banner1.png" >
+      <img src="http://localhost/team_prj/common/images/banner1.png" >
     </a>
     </div>
     <div class="item">
-      <img src="http://localhost/project_2/common/images/banner2.png" >
+      <img src="http://localhost/team_prj/common/images/banner2.png" >
     </div>
 
   </div>
@@ -201,11 +201,11 @@ function chkNull() {
 	</div><!-- 로그인끝 -->
 	<!-- 광고영역 -->
 	<div id="ad"> 
-		<iframe class="embed-responsive-item" width="370" height="200" scrolling="no" src="http://localhost/team_prj/common/images/ad1.png"></iframe>
+		<iframe class="embed-responsive-item" width="370" height="200" scrolling="no" src="http://localhost/team_prj/common/images/ad2.png"></iframe>
 	</div>
 
 	<div id="ad2" class="embed-responsive embed-responsive-4by3">
-  		<iframe class="embed-responsive-item" width="370" height="310" src="http://localhost/team_prj/common/images/ad2.png"></iframe>
+  		<iframe class="embed-responsive-item" width="370" height="310" src="http://localhost/team_prj/common/images/ad1.png"></iframe>
 	</div>
 	
 	</div> 
