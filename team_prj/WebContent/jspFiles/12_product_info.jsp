@@ -1,3 +1,5 @@
+<%@page import="userDAO.ProductVO"%>
+<%@page import="userDAO.UserPageDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -20,6 +22,16 @@
  <style type="text/css">
 
  </style>
+<%-- <%
+	String num=request.getParameter("p_num");
+	int intNum=Integer.parseInt(num);
+	request.setCharacterEncoding("UTF-8");
+	UserPageDAO upDAO=UserPageDAO.getInstance();
+	ProductVO pVO=new ProductVO();
+	pVO=upDAO.selectProduct(intNum);
+	%> --%>
+ 
+ 
  <script type="text/javascript">
  $(function() {
 		$("#buy").click(function() {
@@ -38,17 +50,17 @@
 <img src="https://sjnfzdfjrjgl1655541.cdn.ntruss.com/goods/3/2021/05/729_tmp_ba0e1cf9a11e544280702e8f1b0e9d982846view.jpg" width="500px"; height="500px";>
 </div>
 <div style="margin-left:30px">
-<h2 class="title"><strong>편스토랑 돈규볶음</strong></h2>
-<h3 class="title">6000원</h3>
+<h2 class="title"><strong>편스토랑 돈규볶음<%-- <%=pVO.getP_name() %> --%></strong></h2>
+<h3 class="title">6000원<%-- <%=pVO.getP_price()% --%></h3>
 </div>			
 	<div class="cooktime">
-	조리시간
+	조리시간<%-- <%=pVO.getP_cooktime() %> --%>
 	</div>
 	<div class="cooktime">
-	음식용량
+	음식용량<%-- <%=pVO.getP_amount() %> --%>
 	</div>
 	<div class="cooktime">
-	음식보관방법
+	음식보관방법<%-- <%=pVO.getS_type() %> --%>
 	</div>
 	<hr align="left" style="border: solid 1px #ccc; width: 550px;">
 	<div class="info-menu" >
@@ -73,7 +85,7 @@
 	<input type="button" value="-"/>
 	<input type="text" class="" placeholder="수량" style="width:100px;height:40px;" />
 	<input type="button" value="+"/> &nbsp;&nbsp;
-	<strong>총 금액 30,000원</strong>
+	<strong>총 금액 30,000<%-- <%=pVO.getP_price() %> --%>원</strong>
 	<input type="button"  id="buy" value="구매" class="btn btn-success btn-lg" style="width:150px; margin-left:50px;"/>
 	</div>
 	<div style="text-align:center;font-size:18px;font-weight:bold; margin-top:70px;">
