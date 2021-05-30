@@ -201,11 +201,11 @@ function chkNull() {
 	</div><!-- 로그인끝 -->
 	<!-- 광고영역 -->
 	<div id="ad"> 
-		<iframe class="embed-responsive-item" width="370" height="200" scrolling="no" src="http://localhost/team_prj/common/images/ad1.gif"></iframe>
+		<iframe class="embed-responsive-item" width="370" height="200" scrolling="no" src="http://localhost/team_prj/common/images/ad1.png"></iframe>
 	</div>
 
 	<div id="ad2" class="embed-responsive embed-responsive-4by3">
-  		<iframe class="embed-responsive-item" width="370" height="310" src="http://localhost/team_prj/common/images/ad2.gif"></iframe>
+  		<iframe class="embed-responsive-item" width="370" height="310" src="http://localhost/team_prj/common/images/ad2.png"></iframe>
 	</div>
 	
 	</div> 

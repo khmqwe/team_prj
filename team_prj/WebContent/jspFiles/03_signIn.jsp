@@ -27,7 +27,7 @@
  $(function() { 
 		//아이디 중복확인 팝업 
 		$("#idchk").click(function() {
-			window.open("04_idcheck.jsp","idchk","width=500px,height=300px");
+			window.open("04_idcheck.jsp","id_pop","width=500px,height=300px");
 		});
 		
 		$("#insert").click(function() {
@@ -69,7 +69,29 @@
 		            }
 		        }).open();
 		 });//click
+		 
+		 
+		 
 });//ready
+function changeSelect(s,no){
+    form = document.singUpFrm;
+    sel = s[s.selectedIndex].value;
+    dis = 1;
+ 
+    if(sel=="user"){
+        sel = "";
+        dis = 0;
+    }
+ 
+    if(no==1){
+        form.email2.value = sel;
+        form.email2.disabled = dis;
+    }else{
+        form.email2.value = sel;
+        form.email2.disabled = dis;
+    }
+}
+
 
  </script>
 </head>
@@ -294,6 +316,8 @@
 		<div style="text-align:right;"><input type="checkbox"> 회원정보 약관에 동의합니다.</div>
 		</td>
 	</tr>
+
+	
 	
 	<tr>
 		<td width="110"><label>아이디</label></td>
@@ -322,9 +346,9 @@
 	</tr>
 	<tr>
 		<td ><label>이메일</label></td>
-		<td><input type="text" name="email" size="15"> @
-		<input type="text" size="10">
-		<select name="domain" >
+		<td><input type="text" name="email" id="email" size="15"> @
+		<input type="text" size="10" name="email2" id="email2">
+		<select name="domain"  onchange="inputEmail(this)" >
 		<option value="none">직접입력</option>
 		<option value="daum.net">daum.net</option>
 		<option value="naver.com">naver.com</option>
@@ -352,6 +376,9 @@
 		</td>
 	
 	</tr>
+
+
+	
 
 </table>
 </form>

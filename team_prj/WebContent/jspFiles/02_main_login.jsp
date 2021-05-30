@@ -190,8 +190,8 @@
 		</div>
 	</div><!-- 로그인끝 -->
 	<!-- 광고영역 -->
-	<div id="ad"> </div>
-	<div id="ad2">	</div>
+	<div id="ad"><img src="http://localhost/team_prj/common/images/ad1.png"></div>
+	<div id="ad2"><img src="http://localhost/team_prj/common/images/ad2.png"></div>
 	
 	</div> 
 	
