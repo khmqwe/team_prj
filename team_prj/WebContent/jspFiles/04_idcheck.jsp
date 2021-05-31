@@ -21,36 +21,24 @@
  .use{font-size: 14px; color:#fff; background-color:#333; width:100px; height:27x; font-weight:bold;}
 </style>
 <script type="text/javascript">
-function useId() {
-	var obj=document.idFrm;
-	//부모창을사용할때는 opener로 접근 
-	var pObj=opener.window.document.singUp;
-	//부모창에 값전송
-	pObj.id.value=obj.id.value;
-	//자식창을 닫기
+function useId(){
+    opener.document.getElementById("id").value = document.getElementById("id").value;
 	self.close();
-}//useid
-
-$(function() {
-	 $("#use").click(function() {
-		 useId();
-	 });
-});
-
+}
 </script>
 
 </head>
 <body>
 
 <div align="center" id="wrap">
-<form action="#" name="idFrm">
+<form action="#" name="idfrm">
 <span class="idtitle"><strong>ID CHECK</strong> 아이디 중복확인</span> <br>
 사용하고자 하는 아이디를 입력해주세요.<br>
 아이디 중복확인 후 사용 가능한 아이디를 등록합니다. <br>
 <br>
-<input type="text" class="inputbox" name="id"> <input type="button" value="ID 중복확인" class="btn btn-default" id="chkid"> <br>
+<input type="text" class="inputbox" name="id" id="id"> <input type="button" value="ID 중복확인" class="btn btn-default" id="chkid"> <br>
 <br>
-<input type="button" value="사용하기" class="use" id="use">
+<input type="button" value="사용하기" class="use" id="use"  onclick="useId()" >
 </form>
 </div>
 
