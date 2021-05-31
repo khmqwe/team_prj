@@ -1,5 +1,8 @@
+<%@page import="adminDAO.AdminMemberDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,9 +25,27 @@
 <style type = "text/css">
 
 </style>
-
+  <%
+	AdminMemberDAO amDAO = AdminMemberDAO.getInstance();
+   request.setCharacterEncoding("UTF-8");
+	String id = request.getParameter("m_id");
+	
+	int chk = amDAO.deleteAdminMember(id);
+	String msg = "삭제되지않았습니다.";
+  %> 
 <script type="text/javascript">
-
+$(function(){
+	$("#del_yes").click(function(){
+		if(!chk){
+			msg = "삭제되었습니다.";
+			alert(msg);
+			window.close(); 
+		}
+	});
+	$("#del_no").click(function(){
+		window.close(); 
+	});
+});
 </script>
 </head>
 <body>
@@ -33,8 +54,8 @@
 			<h2> <strong>000회원을 삭제하시겠습니까?</strong> </h2> 
 		<br/><br/><br/><br/>
 		<div>
-			<input type = "button"  class = "btn btn-default" value = "예">
-			<input type = "button" class = "btn btn-default" value = "아니오">
+			<input type = "button"  class = "btn btn-default" id = "del_yes" value = "예">
+			<input type = "button" class = "btn btn-default" id = "del_no" value = "아니오">
 		</div>
 		</div>
 	</div>

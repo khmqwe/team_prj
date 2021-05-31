@@ -1,3 +1,7 @@
+<%@page import="adminDAO.MemberVO"%>
+<%@page import="adminDAO.AdminMemberVO"%>
+<%@page import="java.util.List"%>
+<%@page import="adminDAO.AdminMemberDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -7,8 +11,6 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>회원관리</title>
-	
-	
 	
 	<!-- bootstrap -->
 	<link href="http://localhost/team_prj/common/bootstrap-3.3.2/css/bootstrap.min.css" rel="stylesheet">
@@ -25,13 +27,13 @@
 
 </style>
 <script type="text/javascript">
-$(function() {
+/* $(function() {
 	$("#modify_btn").click(function() {
 		location.href="25_memberManage.jsp";
 	});
 	
 	
-});
+}); */
 </script>
 </head>
 <body>
@@ -83,19 +85,26 @@ $(function() {
 				<td width = 200px;>회원가입일</td>
 				<td width = 80px;>관리</td>
 			</tr>
-			<%for(int i=0;i<8;i++){ %>
-			<tr>
-				<td><%=i%></td>
-				<td>아이디 값</td>
-				<td> 이름 값 </td>
-				<td>회원가입일</td>
-				<td><input type = "button" value = "수정" class = "btn btn-primary" id="modify_btn" ></td>
-			</tr>
-			<%} %>
-			
-			</table>
-		</div>
-		
+	<%
+	
+	AdminMemberDAO amDAO = AdminMemberDAO.getInstance();
+	List <AdminMemberVO> list = amDAO.selectAdminMember_list(3, "");
+	MemberVO mVO  = new MemberVO();
+	%>
+	
+	<%for(int i=0; i<list.size();i++){ %>
+	<tr>
+		<td><%=i %></td>
+		<td><%=list.get(i).getM_id() %></td>
+		<td> <%=list.get(i).getM_name() %> </td>
+		<td><%=list.get(i).getM_date() %></td>
+		<td><a href="http://localhost/team_prj/jspFiles/25_memberManage.jsp?m_id=<%=list.get(i).getM_id()%>">
+		<input type = "button" value = "수정" class = "btn btn-primary" id="modify_btn" >
+		</a></td>
+	</tr>
+	<%}%>
+		</table>
+	</div>
 		<nav>
 <ul class="pagination">
 			    <li>

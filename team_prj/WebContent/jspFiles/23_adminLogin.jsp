@@ -1,3 +1,6 @@
+<%@page import="adminDAO.LoginVO"%>
+<%@page import="adminDAO.AdminLoginDAO"%>
+<%@page import="kr.co.sist.util.cipher.DataEncrypt"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -26,9 +29,34 @@
 <script type="text/javascript">
 $(function(){
 	$("#btnLogin").click(function(){
-		$("#adFrm").submit();
+		chkNull(); 
 	});//get
+	$("#id").keydown(function(evt) {
+		if (evt.which == 13) {
+			chkNull();
+		}
+	});
+	$("#password").keydown(function(evt) {
+		if (evt.which == 13) {
+			chkNull();
+		}
+	});
 });//ready
+
+function chkNull() {
+	if ($("#id").val() == "") {
+		alert("아이디를 입력해주세요.");
+		$("#id").focus();
+		return;
+	}
+	if ($("#password").val() == "") {
+		alert("비밀번호를 입력해주세요.");
+		$("#password").focus();
+		return;
+	}
+	$("#adFrm").submit();
+}
+
 </script>
 </head>
 <body>

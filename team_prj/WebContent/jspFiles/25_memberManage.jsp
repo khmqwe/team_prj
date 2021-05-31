@@ -1,5 +1,10 @@
+<%@page import="java.util.Date"%>
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="adminDAO.MemberVO"%>
+<%@page import="adminDAO.AdminMemberDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+   
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,18 +31,34 @@
 
 <script type="text/javascript">
 $(function() {
-	
+	/* //삭제버튼
 	$("#member_del").click(function() {
 		window.open("26_memberRemove.jsp","삭제","width=610px,height=410px");
-	});
-	
+	}); */
+	//확인버튼
 	$("#submitBtn").click(function() {
 		$("#mFrm").submit();
 	});
 });
 
+function idDelete(delID){
+	window.open("26_memberRemove.jsp? m_id = " + delID ,"삭제" , "width=610px,height=410px");
+}
+
 </script>
 </head>
+<%
+/* 	request.setCharacterEncoding("UTF-8"); */
+ 	AdminMemberDAO amDAO = AdminMemberDAO.getInstance();
+
+  	String id = request.getParameter("m_id");
+	MemberVO mVO = amDAO.selectAdminMember(id);
+	String[] telArr = mVO.getM_telnum().split("-");
+	
+	SimpleDateFormat sf = new SimpleDateFormat("yyyy-mm-dd"); 
+
+
+ %> 
 <body>
 <div class = "container">
 	<div class = "left_bar">
@@ -70,47 +91,48 @@ $(function() {
 			<table border = "1" cellspacing = "0" bordercolor = "#B4B4B4"   style = "width : 800px ; height : 600px ; margin: auto; border-radius: 20px;">
 				<tr>
 					<td class = "title_25" >아이디</td>
-					<td colspan = "3"  id="id" name="id"  style="padding-left:30px; text-align: left;">junhi73</td>
+					<td colspan = "3"  id="id"  style="padding-left:30px; text-align: left;">
+					<%=id%></td>
 				</tr>
 				<tr>
 					<td class = "title_25">이름</td>
 					<td  style="padding-left:30px; text-align: left;">
-					<input type = "text"  id="name" name="name"   placeholder = "이름" style = "width : 300px; height : 30px;"> </td>
+					<input type = "text"  id="name" name="name"   placeholder = "이름" value = "<%=mVO.getM_name() %>" style = "width : 300px; height : 30px;"> </td>
 					<td class = "title_25"> 가입일 </td>
-					<td>2021-05-15 </td>
+					<td><input type = "text"  id="name" name="date"   placeholder = "가입일" value = "<%=mVO.getM_date() %>" style = "width : 300px; height : 30px;"> </td>
 				</tr>
 				<tr>
 					<td class = "title_25">이메일</td>
 					<td colspan = "3"  style="padding-left:30px; text-align: left;">
-					<input type = "text" id="email" name="email"  placeholder = "이메일을 입력해주세요" style = "width : 400px; height : 30px;"></td>
+					<input type = "text" id="email" name="email"  placeholder = "이메일을 입력해주세요"  value = "<%=mVO.getM_email() %>" style = "width : 400px; height : 30px;"></td>
 				</tr>
 				<tr>
 					<td class = "title_25">휴대폰번호</td>
 					<td colspan = "3"  style="padding-left:30px; text-align: left;">
 					
-					<input type = "text"  id="tel1" name="tel1"  style = "width : 60px; height : 30px;"> - 
-					<input type = "text"  id="tel2" name="tel2" style = "width : 60px;  height : 30px;"> - 
-					<input type = "text"  id="tel3" name="tel3" style = "width : 60px;  height : 30px;"></td>
+					<input type = "text"  id="tel1" name="tel1"  style = "width : 60px; height : 30px;"  value="<%= telArr[0] %>"> - 
+					<input type = "text"  id="tel2" name="tel2" style = "width : 60px;  height : 30px;"  value="<%= telArr[1] %>" > - 
+					<input type = "text"  id="tel3" name="tel3" style = "width : 60px;  height : 30px;"  value="<%= telArr[2] %>" ></td>
 				</tr>
 				<tr >
 					<td class = "title_25">주소</td>
 					<td colspan = "3"  style="padding-left:30px; text-align: left;">
-					<input type = "text" id="zipcode" name="zipcode" placeholder = "우편번호" style = "width : 100px; height : 30px;">
-					<input type = "text" id="addr" name="addr" placeholder = "주소" style = "width : 550px; height : 30px;"><br/><br/>
-					<input type = "text" id="addAddr" name="addAddr" placeholder = "상세주소" style = "width : 650px; height : 30px;">
+					<input type = "text" id="zipcode" name="zipcode" placeholder = "우편번호" value="<%= mVO.getM_zipcode() %>" style = "width : 100px; height : 30px;">
+					<input type = "text" id="addr" name="addr" placeholder = "주소"  value="<%= mVO.getM_add_address() %>" style = "width : 550px; height : 30px;"><br/><br/>
+					<input type = "text" id="addAddr" name="addAddr" placeholder = "상세주소"  value="<%= mVO.getM_add_address() %>"  style = "width : 650px; height : 30px;">
 					</td>
 				</tr>
 				<tr>
 					<td class = "title_25">메모</td>
 					<td colspan = "3"  style="padding-left:30px; text-align: left;">
-					<input type = "text" id="memo" name="memo" placeholder = "내용을 입력해주세요" style = "width : 650px ; height : 120px"></td>
+					<input type = "text" id="memo" name="memo" placeholder = "내용을 입력해주세요" value="<%= mVO.getM_memo() %>" style = "width : 650px ; height : 120px"></td>
 				</tr>
 			</table>
 		</div>
 		<div >
 		<br>
 			<input type = "button"  class = "btn btn-primary" id="submitBtn" value = "확인" style="width:80px;height:40px; font-weight:bold;" >
-			<input type = "button"class = "btn btn-default" id="member_del" value = "삭제" style = "background-color: #dfdfdf" ></a>
+			<input type = "button"class = "btn btn-default" id="member_del" value = "삭제" onclick = "idDelete('<%=mVO.getM_id() %>')" style = "background-color: #dfdfdf" >
 			<a href = "24_memberList.jsp"><input type = "button"class = "btn btn-default"value = "목록" style = "border: 0.5px solid #dfdfdf"></a>
 		</div>
 	</form>	

@@ -8,15 +8,6 @@ import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
-import javax.sql.DataSource;
-
-import adminDAO.AdminMemberVO;
-import adminDAO.MemberVO;
-import adminDAO.MemoVO;
-
 
 public class AdminMemberDAO {
 	private static AdminMemberDAO amDAO;
@@ -34,7 +25,7 @@ public static AdminMemberDAO getInstance() {
 		
 	}//getInstance
 
-	public List<AdminMemberVO>selectAdminMember(int option,String optionText)throws SQLException{
+	public List<AdminMemberVO>selectAdminMember_list(int option,String optionText)throws SQLException{
 		List<AdminMemberVO>list=new ArrayList<AdminMemberVO>();
 		
 		
@@ -81,26 +72,24 @@ public static AdminMemberDAO getInstance() {
 	}//selectAdminMember
 	
 	public MemberVO selectAdminMember(String id)throws SQLException{
-		Context ctx;
-		DataSource ds;
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
+		 DbConnection dc = DbConnection.getInstance();
+	      PreparedStatement pstmt = null;
+	      ResultSet rs = null;
+	      Connection con = null;
 		
 		MemberVO mbVO = null;
 		//2. 이름(name="jdbc/dbcp")을 사용하여 실행 중인 자바 환경에서 객체를 찾는다.
 		
 		//3. DBCP에서 꺼내온 객체로부터 Connection 얻기
 		try {
-			ctx = new InitialContext();
-			ds = (DataSource)ctx.lookup("java:comp/env/jdbc/dbcp");
+			con = dc.getCon(); 
+			StringBuilder sb = new StringBuilder();
 			
-			con = ds.getConnection();
+			sb.append( "select m_id, m_name, m_email, m_telnum, m_zipcode, m_address, m_add_address, m_memo   ")
+			   .append("from member  ")
+			    .append("where m_id = ? " );
 			
-			String selectVO = "select m_id, m_name, m_email, m_telnum, m_zipcode, m_address, m_add_address "
-					+ " from member "
-					+ " where m_id = ? ";
-			pstmt = con.prepareStatement(selectVO);
+			pstmt = con.prepareStatement(sb.toString());
 			//4.바인드변수에 값 할당
 			pstmt.setString(1, id);
 			//5.쿼리문 수행후 결과 얻기
@@ -115,16 +104,11 @@ public static AdminMemberDAO getInstance() {
 				
 			}//end if
 			
-		} catch (NamingException e) {
-			e.printStackTrace();
-		}  finally {
-			if (rs != null) rs.close();
-			if (pstmt != null) pstmt.close();
-			if (con != null) con.close();
-		}//end finally
-		
-		
-		return mbVO;
+		} finally {
+	         dc.dbClose(con, pstmt, rs);
+	      }
+	      
+	      return mbVO;
 	}//selectAdminMember
 	
 	public int updateAdminMember(MemoVO mVO)throws SQLException {
