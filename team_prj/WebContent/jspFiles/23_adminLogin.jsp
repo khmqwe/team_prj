@@ -67,7 +67,7 @@ function chkNull() {
 		아이디<br/>
 		 <input type="text" class="inputBox" name= "id" id= "id" /><br/>
 		비밀번호 <br/>
-		 <input type="text" class="inputBox" name= "password" id= "password"/><br/>
+		 <input type="password" class="inputBox" name= "password" id= "password"/><br/>
 		<input type = "button" class = "btn btn-primary" value = "로그인" id="btnLogin" style = "height : 50px; width : 300px; margin-top: 20px; font-size: 20px; border-radius: 10px;" />
 	</div>
 </div>

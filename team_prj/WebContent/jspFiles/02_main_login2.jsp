@@ -127,7 +127,7 @@
   <% for (int i=(selectedPage-1)*6; i< (selectedPage-1)*6 + listLen; i++){ %>
   <div class="col-xs-6 col-md-4"> 
 	  <div class="pList">
-	    <a href="#" class="thumbnail">
+	    <a href="http://localhost/team_prj/jspFiles/12_product_info.jsp" class="thumbnail">
 			<img src="http://localhost/team_prj/common/images/food/<%= mainList.get(i).getP_thumb_img() %>" class="img-rounded">
     	</a>
 		<h4><strong><%= mainList.get(i).getP_name() %></strong></h4>
